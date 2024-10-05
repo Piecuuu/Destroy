@@ -3,9 +3,11 @@ package com.petrolpark.destroy.client.gui.screen;
 import java.util.List;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import com.petrolpark.destroy.block.entity.behaviour.RedstoneQuantityMonitorBehaviour;
 import com.petrolpark.destroy.client.gui.DestroyGuiTextures;
 import com.petrolpark.destroy.util.DestroyLang;
 import com.simibubi.create.foundation.gui.AbstractSimiScreen;
+import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.gui.AllIcons;
 import com.simibubi.create.foundation.gui.widget.IconButton;
 
@@ -16,6 +18,8 @@ import net.minecraft.network.chat.Component;
 
 public abstract class AbstractQuantityObservingScreen extends AbstractSimiScreen {
     
+    protected final RedstoneQuantityMonitorBehaviour quantityBehaviour;
+
     protected final DestroyGuiTextures background;
         
     protected EditBox lowerBound;
@@ -23,8 +27,9 @@ public abstract class AbstractQuantityObservingScreen extends AbstractSimiScreen
 
     protected IconButton confirmButton;
 
-    protected AbstractQuantityObservingScreen(Component title, DestroyGuiTextures background) {
+    protected AbstractQuantityObservingScreen(RedstoneQuantityMonitorBehaviour quantityBehaviour, Component title, DestroyGuiTextures background) {
         super(title);
+        this.quantityBehaviour = quantityBehaviour;
         this.background = background;
     };
 
@@ -33,10 +38,6 @@ public abstract class AbstractQuantityObservingScreen extends AbstractSimiScreen
     protected int getTitleX() {
         return 16;
     };
-
-    protected abstract float getLowerThreshold();
-
-    protected abstract float getUpperThreshold();
 
     protected abstract void onThresholdChange(boolean upper, float newValue);
 
@@ -53,7 +54,7 @@ public abstract class AbstractQuantityObservingScreen extends AbstractSimiScreen
         }); // It thinks minecraft and player might be null
 		addRenderableWidget(confirmButton);
 
-        lowerBound = new EditBox(minecraft.font, guiLeft + 15, guiTop + getEditBoxY(), 70, 10, Component.literal(""+getUpperThreshold()));
+        lowerBound = new EditBox(minecraft.font, guiLeft + 15, guiTop + getEditBoxY(), 70, 10, Component.literal(""+quantityBehaviour.upperThreshold));
         lowerBound.setBordered(false);
         lowerBound.setMaxLength(35);
 		lowerBound.setFocused(false);
@@ -61,7 +62,7 @@ public abstract class AbstractQuantityObservingScreen extends AbstractSimiScreen
 		lowerBound.active = false;
         lowerBound.setTooltip(Tooltip.create(DestroyLang.translate("tooltip.vat.menu.quantity_observed.minimum").component()));
 
-        upperBound = new EditBox(minecraft.font, guiLeft + 171, guiTop + getEditBoxY(), 70, 10, Component.literal(""+getLowerThreshold()));
+        upperBound = new EditBox(minecraft.font, guiLeft + 171, guiTop + getEditBoxY(), 70, 10, Component.literal(""+quantityBehaviour.lowerThreshold));
         upperBound.setBordered(false);
         upperBound.setMaxLength(35);
 		upperBound.setFocused(false);
@@ -82,7 +83,7 @@ public abstract class AbstractQuantityObservingScreen extends AbstractSimiScreen
 
                 // Attempt to update the Vat Side with the given number
                 boolean upper = box == upperBound;
-                float oldValue = upper ? getUpperThreshold() : getLowerThreshold();
+                float oldValue = upper ? quantityBehaviour.upperThreshold : quantityBehaviour.lowerThreshold;
                 try {
                     float value = Float.valueOf(box.getValue());
                     if (value != oldValue) onThresholdChange(upper, value);
@@ -123,5 +124,7 @@ public abstract class AbstractQuantityObservingScreen extends AbstractSimiScreen
     protected void renderWindow(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
         background.render(graphics, guiLeft, guiTop);
         graphics.drawString(font, title, guiLeft + getTitleX(), guiTop + 4, 0x828c97, false);
+        Component currentValue = quantityBehaviour.getLabelledQuantity();
+        graphics.drawString(font, currentValue, guiLeft + background.width / 2 - font.width(currentValue) / 2, guiTop + background.height - 18, AllGuiTextures.FONT_COLOR, false);
     };
 };

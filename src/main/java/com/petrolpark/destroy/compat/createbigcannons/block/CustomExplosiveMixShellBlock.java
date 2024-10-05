@@ -55,8 +55,10 @@ public class CustomExplosiveMixShellBlock extends FuzedProjectileBlock<CustomExp
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult pHit) {
-        InteractionResult dyeingResult = onBlockEntityUse(level, pos, be -> be.tryDye(player.getItemInHand(hand), pHit, level, pos, player));
-        if (dyeingResult != InteractionResult.PASS) return dyeingResult;
+        InteractionResult result = onBlockEntityUse(level, pos, be -> be.tryDye(player.getItemInHand(hand), pHit, level, pos, player));
+        if (result != InteractionResult.PASS) return result;
+        result = super.use(state, level, pos, player, hand, pHit); // Fuse
+        if (result != InteractionResult.PASS) return result;
         if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
             withBlockEntityDo(level, pos, be -> NetworkHooks.openScreen(serverPlayer, be, be::writeToBuffer));
             return InteractionResult.SUCCESS;

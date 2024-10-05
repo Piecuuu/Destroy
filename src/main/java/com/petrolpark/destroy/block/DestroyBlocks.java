@@ -53,6 +53,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -144,6 +145,18 @@ public class DestroyBlocks {
         ).transform(TagGen.pickaxeOnly())
         .item()
         .transform(customItemModel())
+        .register();
+
+    public static final BlockEntry<CreativePumpBlock> CREATIVE_PUMP = REGISTRATE.block("creative_pump", CreativePumpBlock::new)
+        .initialProperties(AllBlocks.MECHANICAL_PUMP)
+        .properties(p -> p
+            .mapColor(MapColor.COLOR_PURPLE)
+            .forceSolidOn()
+        ).transform(TagGen.pickaxeOnly())
+        .item()
+        .properties(p -> p
+            .rarity(Rarity.EPIC)
+        ).build()
         .register();
 
     public static final BlockEntry<CustomExplosiveMixBlock> CUSTOM_EXPLOSIVE_MIX = REGISTRATE.block("custom_explosive_mix", CustomExplosiveMixBlock::new)
@@ -282,6 +295,14 @@ public class DestroyBlocks {
             .instabreak()
             .sound(SoundType.SAND)
         ).register();
+
+    public static final BlockEntry<SiphonBlock> SIPHON = REGISTRATE.block("siphon", SiphonBlock::new)
+        .initialProperties(AllBlocks.FLUID_TANK)
+        .properties(p -> p
+            .mapColor(MapColor.METAL)
+        ).item()
+        .build()
+        .register();
 
     public static final BlockEntry<TestTubeRackBlock> TEST_TUBE_RACK = REGISTRATE.block("test_tube_rack", TestTubeRackBlock::new)
         .initialProperties(() -> Blocks.OAK_PLANKS)
@@ -989,7 +1010,7 @@ public class DestroyBlocks {
         ).tag(BlockTags.MINEABLE_WITH_AXE, BlockTags.PLANKS)
         .item(CombustibleBlockItem::new)
         .tag(ItemTags.PLANKS)
-        .onRegister(i -> i.setBurnTime(20000))
+        .onRegister(i -> i.setBurnTime(2000))
         .build()
         .register();
 

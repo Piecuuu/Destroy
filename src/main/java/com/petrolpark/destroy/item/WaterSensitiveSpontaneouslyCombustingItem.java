@@ -17,18 +17,20 @@ public class WaterSensitiveSpontaneouslyCombustingItem extends SpontaneouslyComb
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         super.inventoryTick(stack, level, entity, slotId, isSelected);
-        checkForWater(stack, entity, isSelected);
+        if (checkForWater(stack, entity, isSelected)) stack.setCount(0);
     };
 
     @Override
     public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity) {
-        checkForWater(stack, entity, true);
+        if (checkForWater(stack, entity, true)) entity.kill();
         return super.onEntityItemUpdate(stack, entity);
     };
 
-    public void checkForWater(ItemStack stack, Entity entity, boolean rainSensitive) {
+    public boolean checkForWater(ItemStack stack, Entity entity, boolean rainSensitive) {
         if (entity.isInWaterOrBubble() || (entity.isInWaterRainOrBubble() && (rainSensitive || (entity instanceof LivingEntity livingEntity && livingEntity.getOffhandItem() == stack)))) {
             SmartExplosion.explode(entity.level(), new SmartExplosion(entity.level(), entity, null, null, entity.position(), 2f, 0.7f));
+            return true;
         };
+        return false;
     };
 };

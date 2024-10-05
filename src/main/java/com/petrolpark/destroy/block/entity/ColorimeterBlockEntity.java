@@ -33,6 +33,12 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class ColorimeterBlockEntity extends SmartBlockEntity {
 
+    public static final DecimalFormat df = new DecimalFormat();
+    static {
+        df.setMinimumFractionDigits(8);
+        df.setMaximumFractionDigits(8);
+    };
+
     public boolean observingGas;
     protected LegacySpecies molecule;
     public RedstoneQuantityMonitorBehaviour redstoneMonitor;
@@ -46,6 +52,7 @@ public class ColorimeterBlockEntity extends SmartBlockEntity {
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
         redstoneMonitor = new RedstoneQuantityMonitorBehaviour(this)
+            .withLabel(f -> DestroyLang.translate("tooltip.colorimeter.menu.current_concentration", df.format(f)).component())
             .onStrengthChanged(strength -> getLevel().setBlockAndUpdate(getBlockPos(), getBlockState().setValue(ColorimeterBlock.POWERED, strength != 0)));
         behaviours.add(redstoneMonitor);
 

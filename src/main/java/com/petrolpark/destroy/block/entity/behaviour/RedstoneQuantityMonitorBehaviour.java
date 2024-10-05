@@ -1,8 +1,9 @@
 package com.petrolpark.destroy.block.entity.behaviour;
 
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.IntConsumer;
 import java.util.function.Supplier;
-import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
@@ -11,6 +12,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 
 public class RedstoneQuantityMonitorBehaviour extends BlockEntityBehaviour {
@@ -19,6 +21,7 @@ public class RedstoneQuantityMonitorBehaviour extends BlockEntityBehaviour {
 
     @Nonnull
     public Optional<Supplier<Float>> quantityObserved;
+    protected Function<Float, Component> label = f -> Component.empty();
 
     public float lowerThreshold;
     public float upperThreshold;
@@ -29,6 +32,11 @@ public class RedstoneQuantityMonitorBehaviour extends BlockEntityBehaviour {
     public RedstoneQuantityMonitorBehaviour(SmartBlockEntity be) {
         super(be);
         quantityObserved = Optional.empty();
+    };
+
+    public RedstoneQuantityMonitorBehaviour withLabel(Function<Float, Component> label) {
+        this.label = label;
+        return this;
     };
 
     public RedstoneQuantityMonitorBehaviour onStrengthChanged(IntConsumer callback) {
@@ -42,8 +50,12 @@ public class RedstoneQuantityMonitorBehaviour extends BlockEntityBehaviour {
     };
 
     public void update() {
-        getWorld().blockUpdated(getPos(), getWorld().getBlockState(getPos()).getBlock());
+        getWorld().updateNeighborsAt(getPos(), blockEntity.getBlockState().getBlock());
         //TODO update adjacent positions?
+    };
+
+    public Component getLabelledQuantity() {
+        return quantityObserved.map(Supplier::get).map(label::apply).orElse(Component.empty());
     };
 
     @Override

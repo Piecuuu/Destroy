@@ -7,6 +7,7 @@ public class DestroyBlocksConfigs extends DestroyConfigBase {
     public final ConfigInt beakerCapacity = i(500, "beakerCapacity", "The capacity (in mB) of Beakers");
     public final ConfigInt roundBottomedFlaskCapacity = i(500, "roundBottomedFlaskCapacity", "The capacity (in mB) of Round-Bottomed Flasks");
     public final ConfigInt measuringCylinderCapacity = i(300, "measuringCylinderCapacity", "The capacity (in mB) of Beakers");
+    public final ConfigInt balloonPoppingCapacity = i(300, "balloonPoppingCapacity", "The volume of gas (in mB) Balloons can hold before popping");
 
     public final ConfigGroup bubbleCap = group(0, "bubbleCap", "Bubble Cap");
     public final ConfigInt bubbleCapCapacity = i(1000, 1, "bubbleCapCapacity", "[in mB]", "Fluid capacity of Bubble Caps", "[setting this too low may make some recpies impossible]");
@@ -41,6 +42,9 @@ public class DestroyBlocksConfigs extends DestroyConfigBase {
     public final ConfigInt redstoneProgrammerMaxChannels = i(20, 0, 64, "redstoneProgrammerMaxChannels", "The maximum number of channels a Redstone Programmer can have.");
     public final ConfigInt redstoneProgrammerMinTicksPerBeat = i(2, 1, 20, "redstoneProgrammerMinTicksPerBeat", "The shortest length (in ticks) a Redstone Programmer can change signal over.", "The lower this is, the greater the potential for players to cause lag.");
 
+    public final ConfigGroup siphon = group(0, "siphon", "Siphon");
+    public final ConfigInt siphonCapacity = i(4000, 1, "siphonCapacity", "[in mB]", "Fluid capacity of Siphons");
+
     public final ConfigGroup treeTap = group(0, "treeTap", "Tapper");
     public final ConfigInt treeTapCapacity = i(1000, 1, "treeTapCapacity", "[in mB]", "Fluid capacity of Tappers");
     public final ConfigFloat treeTapExtractionSpeed = f(1f, 0f, "treeTapExtractionSpeed", "A multiplier for the standard mB-per-tick-per-RPM for Tappers", "[0 will disable Tappers]");
@@ -48,9 +52,9 @@ public class DestroyBlocksConfigs extends DestroyConfigBase {
     public final ConfigGroup vat = group(0, "vat", "Vat");
     public final ConfigBool vatExplodesAtHighPressure = b(true, "vatExplodesAtHighPressure", "Whether Vats explode if the pressure exceeds the maximum of the weakest block.");
     public final ConfigInt simulationLevel = i(10, "simulationLevel", "How many times per tick reactions and thermodynamics are simulated.", "Increasing this may cause lag. Decreasing it can cause flickering in Vats.");
-    public final ConfigFloat blazeBurnerHeatingPower = f(15000f, -Float.MAX_VALUE, Float.MAX_VALUE, "blazeBurnerHeatingPower", "The power supplied by kindled Blaze Burners to Vats and Basins");
-    public final ConfigFloat blazeBurnerSuperHeatingPower = f(50000f, -Float.MAX_VALUE, Float.MAX_VALUE, "blazeBurnerSuperHeatingPower", "The power supplied by superheating Blaze Burners to Vats and Basins");
-    public final ConfigFloat coolerHeatingPower = f(-30000f, -Float.MAX_VALUE, Float.MAX_VALUE, "coolerHeatingPower", "The power supplied by cooling Refrigerstraytors to Vats and Basins");
+    public final ConfigFloat blazeBurnerHeatingPower = f(15000000f, -Float.MAX_VALUE, Float.MAX_VALUE, "blazeBurnerHeatingPower", "The power supplied by kindled Blaze Burners to Vats and Basins");
+    public final ConfigFloat blazeBurnerSuperHeatingPower = f(50000000f, -Float.MAX_VALUE, Float.MAX_VALUE, "blazeBurnerSuperHeatingPower", "The power supplied by superheating Blaze Burners to Vats and Basins");
+    public final ConfigFloat coolerHeatingPower = f(-30000000f, -Float.MAX_VALUE, Float.MAX_VALUE, "coolerHeatingPower", "The power supplied by cooling Refrigerstraytors to Vats and Basins");
 
     @Override
     public String getName() {

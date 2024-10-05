@@ -11,24 +11,13 @@ public class RedstoneMonitorVatSideScreen extends AbstractQuantityObservingScree
     private final VatSideBlockEntity vatSide;
 
     public RedstoneMonitorVatSideScreen(VatSideBlockEntity vatSide) {
-        super(DestroyLang.translate("tooltip.vat.menu.quantity_observed.title").component(), DestroyGuiTextures.VAT_QUANTITY_OBSERVER);
+        super(vatSide.redstoneMonitor, DestroyLang.translate("tooltip.vat.menu.quantity_observed.title").component(), DestroyGuiTextures.VAT_QUANTITY_OBSERVER);
         this.vatSide = vatSide;
     };
-
     
     @Override
     protected int getEditBoxY() {
         return 35;
-    };
-
-    @Override
-    protected float getLowerThreshold() {
-        return vatSide.redstoneMonitor.lowerThreshold;
-    };
-
-    @Override
-    protected float getUpperThreshold() {
-        return vatSide.redstoneMonitor.upperThreshold;
     };
 
     @Override

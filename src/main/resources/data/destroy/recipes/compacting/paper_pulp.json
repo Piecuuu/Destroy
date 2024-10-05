@@ -1,5 +1,5 @@
 {
-    "type": "create:mixing",
+    "type": "create:compacting",
     "ingredients": [
       {
         "tag": "destroy:paper_pulpable"
@@ -8,7 +8,7 @@
         "mixtureFluidWithSalt": "destroy:mixture",
         "cation": "destroy:sodium_ion",
         "anion": "destroy:hydroxide",
-        "amount": 500,
+        "amount": 1,
         "concentration": 5.0
       }
     ],

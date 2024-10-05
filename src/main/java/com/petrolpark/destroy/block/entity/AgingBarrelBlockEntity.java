@@ -191,6 +191,9 @@ public class AgingBarrelBlockEntity extends SmartBlockEntity implements IHaveGog
         if (timer <= 0) {
             tank.allowExtraction();
             tank.allowInsertion();
+        } else {
+            tank.forbidExtraction();
+            tank.forbidInsertion();
         };
         int progress;
         if (timer < 0) {

@@ -1,6 +1,5 @@
 package com.petrolpark.destroy.block.renderer;
 
-import com.jozufozu.flywheel.backend.Backend;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.petrolpark.destroy.block.TreeTapBlock;
 import com.petrolpark.destroy.block.entity.TreeTapBlockEntity;
@@ -24,8 +23,6 @@ public class TreeTapRenderer extends KineticBlockEntityRenderer<TreeTapBlockEnti
 
     @Override
 	protected void renderSafe(TreeTapBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-		super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
-
 		//if (Backend.canUseInstancing(be.getLevel())) return;
 
         BlockState state = be.getBlockState();
@@ -39,8 +36,8 @@ public class TreeTapRenderer extends KineticBlockEntityRenderer<TreeTapBlockEnti
             .translate(0f, 12 / 16f, 7 / 16f)
             .light(light)
             .renderInto(ms, buffer.getBuffer(RenderType.solid()));
-            
-        super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
+
+        renderRotatingBuffer(be, getRotatedModel(be, getRenderedBlockState(be)), ms, buffer.getBuffer(getRenderType(be, state)), light);
 	};
 
     @Override

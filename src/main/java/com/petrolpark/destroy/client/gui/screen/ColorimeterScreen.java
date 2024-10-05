@@ -37,7 +37,7 @@ public class ColorimeterScreen extends AbstractQuantityObservingScreen {
     protected IconButton rightButton;
 
     public ColorimeterScreen(ColorimeterBlockEntity colorimeter, List<LegacySpecies> availableSpecies) {
-        super(Component.translatable("block.destroy.colorimeter"), DestroyGuiTextures.COLORIMETER);
+        super(colorimeter.redstoneMonitor, Component.translatable("block.destroy.colorimeter"), DestroyGuiTextures.COLORIMETER);
         this.colorimeter = colorimeter;
 
         species = colorimeter.getMolecule();
@@ -60,6 +60,7 @@ public class ColorimeterScreen extends AbstractQuantityObservingScreen {
             observingGas = false;
             gasButton.active = true;
             liquidButton.active = false;
+            configureClientColorimeter();
         });
         gasButton = new IconButton(guiLeft + 25, guiTop + 171, DestroyIcons.VAT_GAS);
         gasButton.setToolTip(DestroyLang.translate("tooltip.colorimeter.menu.gas").component());
@@ -68,6 +69,7 @@ public class ColorimeterScreen extends AbstractQuantityObservingScreen {
             observingGas = true;
             gasButton.active = false;
             liquidButton.active = true;
+            configureClientColorimeter();
         });
         addRenderableWidgets(liquidButton, gasButton);
 
@@ -76,12 +78,14 @@ public class ColorimeterScreen extends AbstractQuantityObservingScreen {
         leftButton.withCallback(() -> {
             speciesIndex = speciesIndex > 0 ? speciesIndex - 1 : availableSpecies.size() -1;
             species = availableSpecies.get(speciesIndex);
+            configureClientColorimeter();
         });
         rightButton = new IconButton(guiLeft + 228, guiTop + 49, AllIcons.I_MTD_RIGHT);
         rightButton.setToolTip(DestroyLang.translate("tooltip.colorimeter.menu.change_species").component());
         rightButton.withCallback(() -> {
             speciesIndex = (speciesIndex < availableSpecies.size() - 1) ? speciesIndex + 1 : 0;
             species = availableSpecies.get(speciesIndex);
+            configureClientColorimeter();
         });
         addRenderableWidgets(leftButton, rightButton);
     };
@@ -91,14 +95,8 @@ public class ColorimeterScreen extends AbstractQuantityObservingScreen {
         return 135;
     };
 
-    @Override
-    protected float getLowerThreshold() {
-        return colorimeter.redstoneMonitor.lowerThreshold;
-    };
-
-    @Override
-    protected float getUpperThreshold() {
-        return colorimeter.redstoneMonitor.upperThreshold;
+    private void configureClientColorimeter() {
+        colorimeter.configure(species, observingGas);
     };
 
     @Override

@@ -15,16 +15,19 @@ import com.petrolpark.destroy.client.ponder.scene.ProcessingScenes;
 import com.petrolpark.destroy.client.ponder.scene.TrypolithographyScenes;
 import com.petrolpark.destroy.item.DestroyItems;
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.Create;
 import com.simibubi.create.foundation.ponder.PonderRegistrationHelper;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
 import com.simibubi.create.foundation.ponder.PonderStoryBoardEntry;
 import com.simibubi.create.infrastructure.ponder.AllPonderTags;
+import com.simibubi.create.infrastructure.ponder.scenes.fluid.PumpScenes;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 
 public class DestroyPonderIndex {
 
+    public static final PonderRegistrationHelper CREATE_HELPER = new PonderRegistrationHelper(Create.ID);
     public static final PonderRegistrationHelper HELPER = new PonderRegistrationHelper(Destroy.MOD_ID);
 
     public static void register() {
@@ -74,6 +77,10 @@ public class DestroyPonderIndex {
         HELPER.forComponents(DestroyBlocks.COOLER)
             .addStoryBoard("processing/cooler", ProcessingScenes::cooler)
             .addStoryBoard("vat/temperature", ChemistryScenes::vatTemperature, DestroyPonderTags.CHEMISTRY);
+
+        // Creative Pump
+        CREATE_HELPER.forComponents(DestroyBlocks.CREATIVE_PUMP)
+            .addStoryBoard("mechanical_pump/flow", PumpScenes::flow);
 
         // Custom Explosive Mix
         HELPER.forComponents(DestroyBlocks.CUSTOM_EXPLOSIVE_MIX)
@@ -148,6 +155,10 @@ public class DestroyPonderIndex {
         HELPER.forComponents(DestroyItems.SEISMOMETER)
             .addStoryBoard("oil/seismometer", OilScenes::seismometer)
             .addStoryBoard("oil/seismograph", OilScenes::seismograph);
+
+        // Siphon
+        HELPER.forComponents(DestroyBlocks.SIPHON)
+            .addStoryBoard("processing/siphon", ProcessingScenes::siphon);
 
         // Tree Tap
         HELPER.forComponents(DestroyBlocks.TREE_TAP)      

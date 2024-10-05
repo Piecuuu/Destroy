@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      " P ",
+      "RGR",
+      " P "
+    ],
+    "key": {
+      "P": {
+        "tag": "forge:plates/stainless_steel"
+      },
+      "R": {
+        "tag": "forge:rods/stainless_steel"
+      },
+      "G": {
+        "tag": "forge:glass"
+      }
+    },
+    "result": {
+      "item": "destroy:siphon"
+    }
+  }

@@ -21,6 +21,7 @@ import com.petrolpark.destroy.block.renderer.PollutometerRenderer;
 import com.petrolpark.destroy.block.renderer.PumpjackRenderer;
 import com.petrolpark.destroy.block.renderer.RedstoneProgrammerRenderer;
 import com.petrolpark.destroy.block.renderer.SimpleMixtureTankRenderer;
+import com.petrolpark.destroy.block.renderer.SiphonRenderer;
 import com.petrolpark.destroy.block.renderer.TestTubeRackRenderer;
 import com.petrolpark.destroy.block.renderer.TreeTapRenderer;
 import com.petrolpark.destroy.block.renderer.VatRenderer;
@@ -74,6 +75,11 @@ public class DestroyBlockEntityTypes {
         .blockEntity("cooler", CoolerBlockEntity::new)
         .validBlocks(DestroyBlocks.COOLER)
         .renderer(() -> CoolerRenderer::new)
+        .register();
+
+    public static final BlockEntityEntry<CreativePumpBlockEntity> CREATIVE_PUMP = REGISTRATE
+        .blockEntity("creative_pump", CreativePumpBlockEntity::new)
+        .validBlocks(DestroyBlocks.CREATIVE_PUMP)
         .register();
 
     public static final BlockEntityEntry<CustomExplosiveMixBlockEntity> CUSTOM_EXPLOSIVE_MIX = REGISTRATE
@@ -151,6 +157,12 @@ public class DestroyBlockEntityTypes {
     public static final BlockEntityEntry<SandCastleBlockEntity> SAND_CASTLE = REGISTRATE
         .blockEntity("sand_castle", SandCastleBlockEntity::new)
         .validBlocks(DestroyBlocks.SAND_CASTLE)
+        .register();
+
+    public static final BlockEntityEntry<SiphonBlockEntity> SIPHON = REGISTRATE
+        .blockEntity("siphon", SiphonBlockEntity::new)
+        .validBlocks(DestroyBlocks.SIPHON)
+        .renderer(() -> SiphonRenderer::new)
         .register();
 
     public static final BlockEntityEntry<TestTubeRackBlockEntity> TEST_TUBE_RACK = REGISTRATE

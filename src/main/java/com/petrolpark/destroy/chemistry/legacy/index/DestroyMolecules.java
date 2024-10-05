@@ -774,7 +774,7 @@ public final class DestroyMolecules {
 
     ISOPRENE = builder()
         .id("isoprene")
-        .structure(LegacyMolecularStructure.deserialize("destroy:linear:C=C(C)CC=C"))
+        .structure(LegacyMolecularStructure.deserialize("destroy:linear:C=C(C)C=C"))
         .boilingPoint(34f)
         .density(681f)
         .molarHeatCapacity(102.69f)

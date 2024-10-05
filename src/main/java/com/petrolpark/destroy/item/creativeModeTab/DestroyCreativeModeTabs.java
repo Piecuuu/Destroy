@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import com.petrolpark.client.creativemodetab.CustomTab;
 import com.petrolpark.client.creativemodetab.CustomTab.ITabEntry;
+import com.petrolpark.compat.CompatMods;
 import com.petrolpark.destroy.Destroy;
 import com.petrolpark.destroy.block.DestroyBlocks;
 import com.petrolpark.destroy.config.DestroySubstancesConfigs;
@@ -15,6 +16,7 @@ import com.tterrag.registrate.util.entry.ItemProviderEntry;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -22,6 +24,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class DestroyCreativeModeTabs {
@@ -33,7 +36,7 @@ public class DestroyCreativeModeTabs {
 			.add(
 
 				s("chemistry_equipment"),
-				i(DestroyBlocks.VAT_CONTROLLER), i(DestroyBlocks.STAINLESS_STEEL_BLOCK), i(DestroyBlocks.BOROSILICATE_GLASS), d(AllBlocks.FLUID_PIPE), d(AllBlocks.MECHANICAL_PUMP), d(AllBlocks.CREATIVE_FLUID_TANK), d(AllBlocks.BLAZE_BURNER), i(DestroyBlocks.COOLER), i(DestroyBlocks.BUBBLE_CAP), i(DestroyBlocks.CENTRIFUGE), i(DestroyBlocks.DYNAMO), i(DestroyBlocks.BLACKLIGHT), i(DestroyBlocks.COLORIMETER),  i(DestroyBlocks.CATALYTIC_CONVERTER), i(DestroyBlocks.BEAKER), i(DestroyItems.TEST_TUBE), i(DestroyBlocks.TEST_TUBE_RACK), i(DestroyBlocks.MEASURING_CYLINDER), i(DestroyBlocks.ROUND_BOTTOMED_FLASK), i(DestroyItems.PAPER_MASK), i(DestroyItems.LABORATORY_GOGGLES), i(DestroyItems.GAS_MASK), i(DestroyItems.HAZMAT_SUIT), i(DestroyItems.HAZMAT_LEGGINGS), i(DestroyItems.WELLINGTON_BOOTS),
+				i(DestroyBlocks.VAT_CONTROLLER), i(DestroyBlocks.STAINLESS_STEEL_BLOCK), i(DestroyBlocks.BOROSILICATE_GLASS), d(AllBlocks.FLUID_PIPE), i(DestroyBlocks.CREATIVE_PUMP), d(AllBlocks.CREATIVE_FLUID_TANK), i(DestroyBlocks.SIPHON), d(AllBlocks.BLAZE_BURNER), i(DestroyBlocks.COOLER), i(DestroyBlocks.BUBBLE_CAP), i(DestroyBlocks.CENTRIFUGE), i(DestroyBlocks.DYNAMO), i(DestroyBlocks.BLACKLIGHT), i(DestroyBlocks.COLORIMETER),  i(DestroyBlocks.CATALYTIC_CONVERTER), i(DestroyBlocks.BEAKER), i(DestroyItems.TEST_TUBE), i(DestroyBlocks.TEST_TUBE_RACK), i(DestroyBlocks.MEASURING_CYLINDER), i(DestroyBlocks.ROUND_BOTTOMED_FLASK), i(DestroyItems.PAPER_MASK), i(DestroyItems.LABORATORY_GOGGLES), i(DestroyItems.GAS_MASK), i(DestroyItems.HAZMAT_SUIT), i(DestroyItems.HAZMAT_LEGGINGS), i(DestroyItems.WELLINGTON_BOOTS),
 
 				//s("common_chemicals"),
 				//TODO
@@ -59,13 +62,13 @@ public class DestroyCreativeModeTabs {
 				i(DestroyItems.POLYETHENE_TEREPHTHALATE), i(DestroyItems.POLYVINYL_CHLORIDE), i(DestroyItems.POLYETHENE), i(DestroyItems.POLYPROPENE), i(DestroyItems.POLYSTYRENE), i(DestroyItems.ABS), i(DestroyItems.POLYTETRAFLUOROETHENE), i(DestroyItems.NYLON), i(DestroyItems.POLYSTYRENE_BUTADIENE), i(DestroyItems.POLYACRYLONITRILE), i(DestroyItems.POLYISOPRENE), i(DestroyItems.POLYURETHANE), i(DestroyItems.POLYMETHYL_METHACRYLATE), i(DestroyItems.CARD_STOCK),
 
 				s("resources"),
-				i(DestroyItems.FLUORITE), i(DestroyBlocks.FLUORITE_BLOCK), i(DestroyBlocks.FLUORITE_ORE), i(DestroyBlocks.DEEPSLATE_FLUORITE_ORE), i(DestroyBlocks.END_FLUORITE_ORE), i(DestroyItems.BORAX), i(DestroyItems.SILICA), i(DestroyItems.MOLTEN_BOROSILICATE_GLASS_BUCKET), i(DestroyBlocks.BOROSILICATE_GLASS_FIBER), r(DestroyBlocks.BOROSILICATE_GLASS), i(DestroyBlocks.FIBERGLASS_BLOCK), i(DestroyBlocks.INSULATED_STAINLESS_STEEL_BLOCK), i(DestroyItems.IODINE), i(DestroyBlocks.IODINE_BLOCK), i(DestroyItems.CARBON_FIBER), i(DestroyBlocks.CARBON_FIBER_BLOCK), i(DestroyBlocks.UNVARNISHED_PLYWOOD), i(DestroyBlocks.PLYWOOD), i(DestroyBlocks.CLAY_MONOLITH), i(DestroyBlocks.CERAMIC_MONOLITH), i(DestroyItems.CHALK_DUST), i(DestroyItems.QUICKLIME), i(DestroyItems.ZEOLITE), i(DestroyItems.NANODIAMONDS),
+				i(DestroyItems.FLUORITE), i(DestroyBlocks.FLUORITE_BLOCK), i(DestroyBlocks.FLUORITE_ORE), i(DestroyBlocks.DEEPSLATE_FLUORITE_ORE), i(DestroyBlocks.END_FLUORITE_ORE), i(DestroyItems.BORAX), i(DestroyItems.SILICA), i(DestroyItems.MOLTEN_BOROSILICATE_GLASS_BUCKET), i(DestroyBlocks.BOROSILICATE_GLASS_FIBER), r(DestroyBlocks.BOROSILICATE_GLASS), i(DestroyBlocks.FIBERGLASS_BLOCK), i(DestroyBlocks.INSULATED_STAINLESS_STEEL_BLOCK), i(DestroyItems.IODINE), i(DestroyBlocks.IODINE_BLOCK), i(DestroyItems.CARBON_FIBER), i(DestroyBlocks.CARBON_FIBER_BLOCK), i(DestroyBlocks.UNVARNISHED_PLYWOOD), i(DestroyBlocks.PLYWOOD), i(DestroyBlocks.CLAY_MONOLITH), i(DestroyBlocks.CERAMIC_MONOLITH), i(DestroyItems.CHALK_DUST), i(DestroyItems.QUICKLIME), i(DestroyItems.CALCIUM_CARBIDE), i(DestroyItems.SODIUM_HYDRIDE), i(DestroyItems.ZEOLITE), i(DestroyItems.NANODIAMONDS),
 				//TODO crude oil bucket
 
 				s("explosives"),
 				n(), i(DestroyItems.ACETONE_PEROXIDE), i(DestroyItems.FULMINATED_MERCURY), i(DestroyItems.NICKEL_HYDRAZINE_NITRATE), i(DestroyItems.TOUCH_POWDER),
 				n(), i(DestroyItems.ANFO), i(DestroyItems.CORDITE), i(DestroyItems.DYNAMITE), i(DestroyItems.NITROCELLULOSE), i(DestroyItems.PICRIC_ACID_TABLET), i(DestroyItems.TNT_TABLET), 
-				n(), i(DestroyBlocks.CUSTOM_EXPLOSIVE_MIX), i(DestroyBlocks.DYNAMITE_BLOCK), i(DestroyBlocks.CORDITE_BLOCK), i(DestroyBlocks.EXTRUDED_CORDITE_BLOCK),
+				n(), i(DestroyBlocks.CUSTOM_EXPLOSIVE_MIX), i(Destroy.asResource("custom_explosive_mix_charge")), i(Destroy.asResource("custom_explosive_mix_shell")), i(DestroyBlocks.DYNAMITE_BLOCK), i(DestroyBlocks.CORDITE_BLOCK), i(DestroyBlocks.EXTRUDED_CORDITE_BLOCK),
 				
 				s("pharmaceuticals"),
 				i(DestroyItems.SYRINGE), i(DestroyItems.ASPIRIN_SYRINGE), i(DestroyItems.CISPLATIN_SYRINGE), c(DestroyItems.BABY_BLUE_SYRINGE, DestroySubstancesConfigs::babyBlueEnabled), c(DestroyItems.BABY_BLUE_CRYSTAL, DestroySubstancesConfigs::babyBlueEnabled), c(DestroyItems.BABY_BLUE_POWDER, DestroySubstancesConfigs::babyBlueEnabled), i(DestroyItems.SPRAY_BOTTLE), i(DestroyItems.PERFUME_BOTTLE), i(DestroyItems.SUNSCREEN_BOTTLE), i(DestroyItems.CREATINE),
@@ -109,6 +112,10 @@ public class DestroyCreativeModeTabs {
 
 	public static final ITabEntry.Item i(Supplier<ItemStack> item) {
 		return new ITabEntry.Item(item);
+	};
+
+	public static final ITabEntry.Item i(ResourceLocation itemId) {
+		return new ITabEntry.ConditionalItem(() -> new ItemStack(ForgeRegistries.ITEMS.getDelegate(itemId).get().value()), () -> CompatMods.BIG_CANNONS.isLoaded() && ForgeRegistries.ITEMS.containsKey(itemId));
 	};
 
 	public static final ITabEntry.ConditionalItem c(ItemProviderEntry<?> item, Supplier<Boolean> condition) {

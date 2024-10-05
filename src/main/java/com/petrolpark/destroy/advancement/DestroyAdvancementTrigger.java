@@ -58,6 +58,7 @@ public enum DestroyAdvancementTrigger {
     USE_PUMPJACK("use_pumpjack", "pumpjack"),
     JUMP_ON_SAND_CASTLE("jump_on_sand_castle", "sand_castle"),
     USE_SEISMOMETER,
+    SIPHON,
     STEAM_REFORMATION,
     TAP_TREE,
     COLLECT_TEARS("collect_tears", "tear_bottle"),

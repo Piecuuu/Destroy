@@ -120,7 +120,10 @@ public class DestroyShapes {
         .add(2, 2, 2, 14, 10, 14)
         .add(3, 10, 3, 13, 12, 13)
         .add(5, 12, 5, 11, 16, 11)
-        .forDirectional(Direction.UP);
+        .forDirectional(Direction.UP),
+
+    CREATIVE_PUMP = shape(3, 0, 3, 13, 16, 13)
+        .forAxis();
 
     public static final VoxelShaper BLOWPIPE = shape(7, 0, 7, 9, 16, 9).forAxis();
         

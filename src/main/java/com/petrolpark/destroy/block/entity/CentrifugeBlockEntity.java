@@ -81,9 +81,6 @@ public class CentrifugeBlockEntity extends KineticBlockEntity implements IDirect
 
     private Direction denseOutputTankFace;
 
-    private int lubricationLevel;
-    private static final int MAX_LUBRICATION_LEVEL = 10;
-
     public int timer;
     private CentrifugationRecipe lastRecipe;
 
@@ -92,7 +89,6 @@ public class CentrifugeBlockEntity extends KineticBlockEntity implements IDirect
     public CentrifugeBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
         super(typeIn, pos, state);
         denseOutputTankFace = state.getValue(CentrifugeBlock.DENSE_OUTPUT_FACE);
-        lubricationLevel = 1;
         pondering = false;
     };
 
@@ -197,7 +193,6 @@ public class CentrifugeBlockEntity extends KineticBlockEntity implements IDirect
 
     @Override
     protected void read(CompoundTag compound, boolean clientPacket) {
-        lubricationLevel = compound.getInt("Lubrication");
         timer = compound.getInt("Timer");
         getInputTank().readFromNBT(compound.getCompound("InputTank"));
         getDenseOutputTank().readFromNBT(compound.getCompound("DenseOutputTank"));
@@ -208,7 +203,6 @@ public class CentrifugeBlockEntity extends KineticBlockEntity implements IDirect
 
     @Override
     protected void write(CompoundTag compound, boolean clientPacket) {
-        compound.putInt("Lubrication", lubricationLevel);
         compound.putInt("Timer", timer);
         compound.put("InputTank", getInputTank().writeToNBT(new CompoundTag()));
         compound.put("DenseOutputTank", getDenseOutputTank().writeToNBT(new CompoundTag()));
@@ -217,8 +211,7 @@ public class CentrifugeBlockEntity extends KineticBlockEntity implements IDirect
     };
 
     public int getProcessingSpeed() {
-        float lubricationMultiplier = lubricationLevel / MAX_LUBRICATION_LEVEL;
-        return Mth.clamp((int) Math.abs(getSpeed() * lubricationMultiplier / 16f), 1, 512);
+        return Mth.clamp((int) Math.abs(getSpeed() / 16f), 1, 512);
     };
 
     public SmartFluidTank getInputTank() {

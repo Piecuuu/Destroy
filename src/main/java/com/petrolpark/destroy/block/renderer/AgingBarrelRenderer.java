@@ -6,6 +6,7 @@ import java.util.List;
 import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.petrolpark.destroy.Destroy;
+import com.petrolpark.destroy.block.AgingBarrelBlock;
 import com.petrolpark.destroy.block.entity.AgingBarrelBlockEntity;
 import com.petrolpark.destroy.util.DestroyTags.DestroyItemTags;
 import com.simibubi.create.foundation.fluid.FluidRenderer;
@@ -38,6 +39,8 @@ public class AgingBarrelRenderer extends SmartBlockEntityRenderer<AgingBarrelBlo
     @Override
     protected void renderSafe(AgingBarrelBlockEntity barrel, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         super.renderSafe(barrel, partialTicks, ms, buffer, light, overlay);
+
+        if (!barrel.getBlockState().getValue(AgingBarrelBlock.IS_OPEN)) return;
 
         //render Fluid
         float fluidLevel = renderFluid(barrel, partialTicks, ms, buffer, light, overlay);
@@ -104,7 +107,7 @@ public class AgingBarrelRenderer extends SmartBlockEntityRenderer<AgingBarrelBlo
         TankSegment tank = barrel.getTankToRender();
         float units = tank.getTotalUnits(partialTicks);
         float maxY = minY + (Mth.clamp(units / barrel.getTank().getCapacity(), 0, 1) * 8 / 12f);
-        if (units < 1) return minY;
+        if (units < 1 || tank.getRenderedFluid().isEmpty()) return minY;
         FluidRenderer.renderFluidBox(tank.getRenderedFluid(), 2 / 16f, minY, 2 / 16f, 14 / 16f, maxY, 14 / 16f, buffer, ms, light, false);
         return maxY;
     };

@@ -51,7 +51,8 @@ public abstract class ServerGamePacketListenerImplMixin implements ServerGamePac
         method = "handleSetCreativeModeSlot",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/item/ItemStack;isEmpty()Z"
+            target = "Lnet/minecraft/world/item/ItemStack;isEmpty()Z",
+            ordinal = 1
         ),
         locals = LocalCapture.CAPTURE_FAILSOFT,
         cancellable = true

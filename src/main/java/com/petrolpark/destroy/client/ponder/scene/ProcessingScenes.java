@@ -13,6 +13,7 @@ import com.petrolpark.destroy.block.entity.AgingBarrelBlockEntity;
 import com.petrolpark.destroy.block.entity.BlowpipeBlockEntity;
 import com.petrolpark.destroy.block.entity.BubbleCapBlockEntity;
 import com.petrolpark.destroy.block.entity.CentrifugeBlockEntity;
+import com.petrolpark.destroy.block.entity.SiphonBlockEntity;
 import com.petrolpark.destroy.block.entity.TreeTapBlockEntity;
 import com.petrolpark.destroy.chemistry.legacy.LegacyMixture;
 import com.petrolpark.destroy.chemistry.legacy.ReadOnlyMixture;
@@ -996,6 +997,105 @@ public class ProcessingScenes {
 
 
         scene.markAsFinished();
+    };
+
+    public static void siphon(SceneBuilder scene, SceneBuildingUtil util) {
+        scene.title("siphon", "This text is defined in a language file.");
+        scene.configureBasePlate(0, 0, 5);
+        scene.showBasePlate();
+        
+        BlockPos siphon = util.grid.at(2, 1, 2);
+        scene.world.modifyBlockEntity(siphon, SiphonBlockEntity.class, be -> be.leftToDrain = 0);
+        scene.idle(10);
+        scene.world.showSection(util.select.position(siphon), Direction.DOWN);
+        scene.idle(10);
+        scene.world.showSection(util.select.position(2, 0, 5), Direction.NORTH);
+        scene.idle(5);
+        scene.world.showSection(util.select.position(1, 1, 5), Direction.NORTH);
+        scene.idle(5);
+        scene.world.showSection(util.select.fromTo(1, 1, 4, 2, 1, 4), Direction.DOWN);
+        scene.idle(5);
+        scene.world.showSection(util.select.fromTo(1, 1, 3, 3, 1, 3), Direction.DOWN);
+        scene.idle(10);
+        BlockPos pump1 = util.grid.at(3, 1, 2);
+        scene.world.showSection(util.select.position(pump1), Direction.DOWN);
+        scene.idle(20);
+        BlockPos tank1 = util.grid.at(4, 1, 2);
+        scene.world.showSection(util.select.position(tank1), Direction.DOWN);
+        scene.idle(20);
+        scene.world.modifyBlockEntity(tank1, FluidTankBlockEntity.class, tank -> tank.getTankInventory().fill(new FluidStack(Fluids.WATER, 8000), FluidAction.EXECUTE));
+        scene.world.propagatePipeChange(pump1);
+        scene.idle(20);
+
+        scene.overlay.showText(80)
+            .text("This text is defined in a language file.")
+            .pointAt(util.vector.topOf(siphon));
+        scene.idle(20);
+        BlockPos pump2 = util.grid.at(1, 1, 2);
+        scene.world.showSection(util.select.position(pump2), Direction.DOWN);
+        scene.idle(10);
+        BlockPos tank2 = util.grid.at(0, 1, 2);
+        scene.world.showSection(util.select.position(tank2), Direction.DOWN);
+        scene.idle(20);
+        BlockPos lever = util.grid.at(2, 1, 1);
+        scene.world.showSection(util.select.position(lever), Direction.DOWN);
+        scene.idle(50);
+
+        scene.overlay.showText(120)
+            .independent(0)
+            .text("This text is defined in a language file.");
+        scene.idle(20);
+        Selection redstone = util.select.fromTo(lever, siphon);
+        scene.world.modifyBlocks(redstone, s -> s.cycle(BlockStateProperties.POWERED), false);
+        scene.effects.indicateRedstone(lever);
+        scene.world.modifyBlockEntity(siphon, SiphonBlockEntity.class, be -> be.leftToDrain = 1000);
+        scene.idle(40);
+        scene.overlay.showText(60)
+            .text("This text is defined in a language file.")
+            .pointAt(util.vector.blockSurface(tank2, Direction.NORTH))
+            .placeNearTarget()
+            .colored(PonderPalette.MEDIUM);
+        scene.idle(80);
+
+        scene.overlay.showText(160)
+            .text("This text is defined in a language file.")
+            .pointAt(util.vector.blockSurface(siphon, Direction.NORTH));
+        scene.idle(20);
+        scene.overlay.showControls(new InputWindowElement(util.vector.topOf(siphon), Pointing.DOWN).rightClick(), 30);
+        scene.idle(50);
+        scene.overlay.showText(30)
+            .text("This text is defined in a language file.")
+            .pointAt(util.vector.topOf(siphon))
+            .placeNearTarget();
+        scene.idle(50);
+        scene.world.modifyBlocks(redstone, s -> s.cycle(BlockStateProperties.POWERED), false);
+        scene.effects.indicateRedstone(lever);
+        scene.idle(20);
+        scene.world.modifyBlocks(redstone, s -> s.cycle(BlockStateProperties.POWERED), false);
+        scene.effects.indicateRedstone(lever);
+        scene.world.modifyBlockEntity(siphon, SiphonBlockEntity.class, be -> be.leftToDrain = 200);
+        scene.idle(40);
+
+        scene.overlay.showText(160)
+            .text("This text is defined in a language file.")
+            .independent()
+            .attachKeyFrame();
+        scene.idle(40);
+        for (int i = 0; i < 4; i++) {
+            scene.world.modifyBlocks(redstone, s -> s.cycle(BlockStateProperties.POWERED), false);
+            scene.effects.indicateRedstone(lever);
+            if (i == 1) scene.world.modifyBlockEntity(siphon, SiphonBlockEntity.class, be -> be.leftToDrain = 400);
+            scene.idle(10);
+        };
+        scene.idle(20);
+        scene.overlay.showText(60)
+            .text("This text is defined in a language file.")
+            .pointAt(util.vector.blockSurface(tank2, Direction.NORTH))
+            .placeNearTarget()
+            .colored(PonderPalette.MEDIUM);
+        scene.idle(80);
+
+        scene.markAsFinished();    
     };
 
     

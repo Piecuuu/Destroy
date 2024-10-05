@@ -6,7 +6,7 @@
       },
       {
         "mixtureFluidWithMolecule": "destroy:mixture",
-        "amount": 200,
+        "amount": 2,
         "molecule": "destroy:nitroglycerine",
         "concentration": 7.0
       }
