@@ -1914,7 +1914,7 @@
     "item.destroy.wellington_boots.tooltip": "WELLINGTON_BOOTS",
     "item.destroy.wellington_boots.tooltip.summary": "这些时髦的靴子是由威灵顿公爵手工制作的。和_防毒面具_ 、_防护服上衣_及_防护服护腿_一同穿戴可以使你免受危险物质的伤害。",
     "item.destroy.wellington_boots.tooltip.condition1": "穿在腿上时",
-    "item.destroy.wellington_boots.tooltip.behaviour1": "免受腐蚀性化学物质的影响。",
+    "item.destroy.wellington_boots.tooltip.behaviour1": "免受腐蚀性化学物质的影响",
     "item.destroy.yeast": "酵母块",
     "item.destroy.yeast.tooltip": "BRICK_OF_YEAST",
     "item.destroy.yeast.tooltip.summary": "这种有趣的真菌是一种_发酵_基。",
