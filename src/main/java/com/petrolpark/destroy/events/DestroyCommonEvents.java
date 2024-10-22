@@ -318,8 +318,8 @@ public class DestroyCommonEvents {
             });
         } else if (!event.isWasDeath() || DestroyAllConfigs.SERVER.substances.keepCreatineExtraInventorySizeOnDeath.get() || keepInv) {
             // Copy Extra Inventory due to Creatine
-            event.getEntity().getAttribute(DestroyAttributes.EXTRA_INVENTORY_SIZE.get()).addPermanentModifier(event.getOriginal().getAttribute(DestroyAttributes.EXTRA_INVENTORY_SIZE.get()).getModifier(CreatineItem.EXTRA_INVENTORY_ATTRIBUTE_MODIFIER));
-            event.getEntity().getAttribute(DestroyAttributes.EXTRA_HOTBAR_SLOTS.get()).addPermanentModifier(event.getOriginal().getAttribute(DestroyAttributes.EXTRA_HOTBAR_SLOTS.get()).getModifier(CreatineItem.EXTRA_HOTBAR_ATTRIBUTE_MODIFIER));
+            if (event.getOriginal().getAttribute(DestroyAttributes.EXTRA_INVENTORY_SIZE.get()).getModifier(CreatineItem.EXTRA_INVENTORY_ATTRIBUTE_MODIFIER) != null) event.getEntity().getAttribute(DestroyAttributes.EXTRA_INVENTORY_SIZE.get()).addPermanentModifier(event.getOriginal().getAttribute(DestroyAttributes.EXTRA_INVENTORY_SIZE.get()).getModifier(CreatineItem.EXTRA_INVENTORY_ATTRIBUTE_MODIFIER));
+            if (event.getOriginal().getAttribute(DestroyAttributes.EXTRA_HOTBAR_SLOTS.get()).getModifier(CreatineItem.EXTRA_HOTBAR_ATTRIBUTE_MODIFIER) != null) event.getEntity().getAttribute(DestroyAttributes.EXTRA_HOTBAR_SLOTS.get()).addPermanentModifier(event.getOriginal().getAttribute(DestroyAttributes.EXTRA_HOTBAR_SLOTS.get()).getModifier(CreatineItem.EXTRA_HOTBAR_ATTRIBUTE_MODIFIER));
             ExtendedInventory.get(event.getEntity()).updateSize();
             if (keepInv) event.getEntity().getInventory().replaceWith(event.getOriginal().getInventory()); // Do this again as this Event is fired after it occurs
         };
