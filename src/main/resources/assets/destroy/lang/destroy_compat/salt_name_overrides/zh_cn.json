@@ -87,17 +87,18 @@
         "generic": "destroy.chemical.proton.salt",
         "specifics": {
             "destroy:acetate": "destroy.chemical.acetic_acid",
-            "destroy:chloride": "destroy.chemical.hydrochloric_acid",
+            "destroy:chloride": "destroy.chemical.hydrochloric_acid.acid",
             "destroy:chloroaurate": "destroy.chemical.chloroauric_acid",
             "destroy:chromate": "destroy.chemical.chromic_acid",
-            "destroy:cyanide": "destroy.chemical.hydrogen_cyanide",
+            "destroy:cyanide": "destroy.chemical.hydrogen_cyanide.acid",
             "destroy:dichromate": "destroy.chemical.dichromic_acid",
-            "destroy:fluoride": "destroy.chemical.hydrofluoric_acid",
+            "destroy:fluoride": "destroy.chemical.hydrofluoric_acid.acid",
             "destroy:hydrogensulfate": "destroy.chemical.sulfuric_acid",
             "destroy:hypochlorite": "destroy.chemical.hydrochlorous_acid",
-            "destroy:iodide": "destroy.chemical.hydrogen_iodide",
+            "destroy:iodide": "destroy.chemical.hydrogen_iodide.acid",
             "destroy:nitrate": "destroy.chemical.nitric_acid",
-            "destroy:sulfate": "destroy.chemical.sulfuric_acid"
+            "destroy:sulfate": "destroy.chemical.sulfuric_acid",
+            "destroy:sulfide": "destroy.chemical.sulfide.acid"
         }
     },
     "destroy:sodium_ion": {
