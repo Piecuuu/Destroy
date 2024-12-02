@@ -20,6 +20,8 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BoilingFluidBubbleParticle extends FluidStackParticle {
@@ -169,6 +171,7 @@ public class BoilingFluidBubbleParticle extends FluidStackParticle {
         };
     
         @Override
+        @OnlyIn(Dist.CLIENT)
         public SpriteParticleRegistration<Data> getMetaFactory() {
             return BoilingFluidBubbleParticle.Provider::new;
         };
