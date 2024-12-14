@@ -19,10 +19,11 @@
     "frame": "challenge"
   },
   "rewards": {
-      "loot": [
-        "destroy:advancements/gold_laboratory_goggles"
-      ]
-    },
+    "experience": 100,
+    "loot": [
+      "destroy:advancements/gold_laboratory_goggles"
+    ]
+  },
   "requirements": [
     [
       "build"
