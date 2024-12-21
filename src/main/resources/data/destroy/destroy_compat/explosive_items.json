@@ -48,6 +48,13 @@
         "brisance": -1.2,
         "sensitivity": -0.8
     },
+    "destroy:confetti": {
+        "energy": -0.1,
+        "oxygen_balance": 0.0,
+        "temperature": 0.0,
+        "brisance": 0.0,
+        "sensitivity": 0.0
+    },
     "destroy:cordite_rods": {
         "energy": 4.3,
         "oxygen_balance": -1.0,
@@ -82,6 +89,13 @@
         "temperature": 4.2,
         "brisance": 2.5,
         "sensitivity": -3.0
+    },
+    "destroy:white_confetti": {
+        "energy": -0.1,
+        "oxygen_balance": 0.0,
+        "temperature": 0.0,
+        "brisance": 0.0,
+        "sensitivity": 0.0
     }
 
 }

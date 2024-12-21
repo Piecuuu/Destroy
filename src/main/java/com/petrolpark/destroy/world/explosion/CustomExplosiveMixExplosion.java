@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 import com.petrolpark.destroy.Destroy;
+import com.petrolpark.destroy.item.ISpecialEffectExplosiveItem;
 import com.petrolpark.destroy.item.inventory.CustomExplosiveMixInventory;
 import com.petrolpark.destroy.world.explosion.ExplosiveProperties.ExplosiveProperty;
 
@@ -98,6 +99,7 @@ public class CustomExplosiveMixExplosion extends SmartExplosion {
         ListTag fireworkExplosionsTag = new ListTag();
         if (clientSide) for (ItemStack stack : specialItems) {
             if (stack.getItem() instanceof FireworkStarItem) fireworkExplosionsTag.add(stack.getTagElement("Explosion"));
+            else if (stack.getItem() instanceof ISpecialEffectExplosiveItem specialItem) specialItem.explode(this, level, toBlow, stack);
         };
         if (!fireworkExplosionsTag.isEmpty()) {
             CompoundTag fireworkTag = new CompoundTag();

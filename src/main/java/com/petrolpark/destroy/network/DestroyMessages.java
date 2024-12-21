@@ -7,6 +7,7 @@ import com.petrolpark.destroy.network.packet.C2SPacket;
 import com.petrolpark.destroy.network.packet.ChangeKeypunchPositionC2SPacket;
 import com.petrolpark.destroy.network.packet.ChemicalPoisonS2CPacket;
 import com.petrolpark.destroy.network.packet.CircuitPatternsS2CPacket;
+import com.petrolpark.destroy.network.packet.ConfettiBurstPacket;
 import com.petrolpark.destroy.network.packet.ConfigureColorimeterC2SPacket;
 import com.petrolpark.destroy.network.packet.CryingS2CPacket;
 import com.petrolpark.destroy.network.packet.EvaporatingFluidS2CPacket;
@@ -30,6 +31,7 @@ import com.petrolpark.destroy.network.packet.SyncVatMaterialsS2CPacket;
 import com.petrolpark.destroy.network.packet.TransferFluidC2SPacket;
 import com.petrolpark.destroy.network.packet.RedstoneQuantityMonitorThresholdChangeC2SPacket;
 
+import net.minecraft.core.BlockSource;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -38,6 +40,7 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.PacketDistributor.TargetPoint;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public class DestroyMessages {
@@ -73,6 +76,7 @@ public class DestroyMessages {
         addS2CPacket(net, SyncChunkPollutionS2CPacket.class, SyncChunkPollutionS2CPacket::new);
         addS2CPacket(net, ExtraInventorySizeChangeS2CPacket.class, ExtraInventorySizeChangeS2CPacket::new);
         addS2CPacket(net, SmartExplosionS2CPacket.class, SmartExplosionS2CPacket::read);
+        addS2CPacket(net, ConfettiBurstPacket.class, ConfettiBurstPacket::new);
 
         addC2SPacket(net, SwissArmyKnifeToolC2SPacket.class, SwissArmyKnifeToolC2SPacket::new);
         addC2SPacket(net, RedstoneProgramSyncC2SPacket.class, RedstoneProgramSyncC2SPacket::new);
@@ -116,6 +120,10 @@ public class DestroyMessages {
 
     public static void sendToAllClients(S2CPacket message) {
         INSTANCE.send(PacketDistributor.ALL.noArg(), message);
+    };
+
+    public static void sendToAllClientsNear(S2CPacket message, BlockSource location) {
+        INSTANCE.send(PacketDistributor.NEAR.with(TargetPoint.p(location.x(), location.y(), location.z(), 32d, location.getLevel().dimension())), message);
     };
 
     public static void sendToClientsTrackingEntity(S2CPacket message, Entity trackedEntity) {
