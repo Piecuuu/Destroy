@@ -3,6 +3,7 @@ package com.petrolpark.destroy.client.particle;
 import java.util.function.Supplier;
 
 import com.petrolpark.destroy.Destroy;
+import com.petrolpark.destroy.client.particle.data.ConfettoParticleData;
 import com.petrolpark.destroy.client.particle.data.GasParticleData;
 import com.simibubi.create.foundation.particle.ICustomParticleData;
 import com.simibubi.create.foundation.utility.Lang;
@@ -20,8 +21,8 @@ import net.minecraftforge.registries.RegistryObject;
 public enum DestroyParticleTypes {
 
     BOILING_FLUID_BUBBLE(BoilingFluidBubbleParticle.Data::new),
-    CONFETTO(ConfettoParticle.Data::new),
-    WHITE_CONFETTO(ConfettoParticle.Data::new),
+    CONFETTO(ConfettoParticleData::new),
+    WHITE_CONFETTO(ConfettoParticleData.White::new),
     DISTILLATION(GasParticleData::new),
     EVAPORATION(GasParticleData::new),
     RAIN(RainParticle.Data::new),

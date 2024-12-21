@@ -1,12 +1,9 @@
 package com.petrolpark.destroy.client.particle;
 
-import com.simibubi.create.content.equipment.bell.BasicParticleData;
-
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.particle.TextureSheetParticle;
-import net.minecraft.core.particles.ParticleType;
 import net.minecraft.util.Mth;
 
 public class ConfettoParticle extends TextureSheetParticle {
@@ -15,7 +12,7 @@ public class ConfettoParticle extends TextureSheetParticle {
     public float swayMagnitude;
     public int swayOffset;
 
-    protected ConfettoParticle(ClientLevel level, double x, double y, double z, double vx, double vy, double vz, SpriteSet sprites) {
+    public ConfettoParticle(ClientLevel level, double x, double y, double z, double vx, double vy, double vz, SpriteSet sprites) {
         super(level, x, y, z);
         xd = vx;
         yd = vy;
@@ -53,26 +50,4 @@ public class ConfettoParticle extends TextureSheetParticle {
     public ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     };
-    
-    public static class Data extends BasicParticleData<ConfettoParticle> {
-
-        @Override
-        public ParticleType<?> getType() {
-            return DestroyParticleTypes.CONFETTO.get();
-        };
-
-        @Override
-        public IBasicParticleFactory<ConfettoParticle> getBasicFactory() {
-            return ConfettoParticle::new;
-        };
-
-    };
-
-    public static class DataWhite extends Data {
-
-        @Override
-        public ParticleType<?> getType() {
-            return DestroyParticleTypes.WHITE_CONFETTO.get();
-        };
-    };    
 };

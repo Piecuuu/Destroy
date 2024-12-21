@@ -6,7 +6,7 @@ import static com.simibubi.create.AllTags.forgeItemTag;
 import com.petrolpark.compat.CompatMods;
 import com.petrolpark.compat.curios.CuriosSetup;
 import com.petrolpark.destroy.block.DestroyBlocks;
-import com.petrolpark.destroy.client.particle.ConfettoParticle;
+import com.petrolpark.destroy.client.particle.data.ConfettoParticleData;
 import com.petrolpark.destroy.config.DestroyAllConfigs;
 import com.petrolpark.destroy.effect.DestroyMobEffects;
 import com.petrolpark.destroy.item.food.DestroyFoods;
@@ -730,9 +730,9 @@ public class DestroyItems {
 
     public static final ItemEntry<ConfettiItem>
 
-    CONFETTI = REGISTRATE.item("confetti", p -> new ConfettiItem(p, ConfettoParticle.Data::new))
+    CONFETTI = REGISTRATE.item("confetti", p -> new ConfettiItem(p, ConfettoParticleData::new))
         .register(),
-    WHITE_CONFETTI = REGISTRATE.item("white_confetti", p -> new ConfettiItem(p, ConfettoParticle.DataWhite::new))
+    WHITE_CONFETTI = REGISTRATE.item("white_confetti", p -> new ConfettiItem(p, ConfettoParticleData.White::new))
         .register();
 
 
