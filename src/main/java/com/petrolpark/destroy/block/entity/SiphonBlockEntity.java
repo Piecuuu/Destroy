@@ -118,6 +118,7 @@ public class SiphonBlockEntity extends SmartBlockEntity implements IHaveLabGoggl
             @Override
             public FluidStack drain(FluidStack resource, FluidAction action) {
                 FluidStack toDrain = resource.copy();
+                if (toDrain.isEmpty()) return FluidStack.EMPTY;
                 toDrain.setAmount(Math.min(resource.getAmount(), leftToDrain));
                 FluidStack drained = super.drain(toDrain, action);
                 if (action.execute()) leftToDrain -= drained.getAmount();
