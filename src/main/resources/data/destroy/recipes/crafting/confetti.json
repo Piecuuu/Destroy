@@ -1,0 +1,37 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+      {
+        "tag": "forge:dyes"
+      },
+      {
+        "item": "destroy:white_confetti"
+      },
+      {
+        "item": "destroy:white_confetti"
+      },
+      {
+        "item": "destroy:white_confetti"
+      },
+      {
+        "item": "destroy:white_confetti"
+      },
+      {
+        "item": "destroy:white_confetti"
+      },
+      {
+        "item": "destroy:white_confetti"
+      },
+      {
+        "item": "destroy:white_confetti"
+      },
+      {
+        "item": "destroy:white_confetti"
+      }
+    ],
+    "result": {
+      "item": "destroy:confetti",
+      "count": 8
+    }
+    
+  }
