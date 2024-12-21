@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.petrolpark.destroy.item.ISpecialEffectExplosiveItem;
 import com.petrolpark.destroy.world.explosion.ExplosiveProperties;
 import com.petrolpark.destroy.world.explosion.ExplosiveProperties.ExplosiveProperty;
 import com.petrolpark.destroy.world.explosion.ExplosiveProperties.ExplosivePropertyCondition;
@@ -49,7 +50,7 @@ public class CustomExplosiveMixInventory extends ItemStackHandler {
      * @return
      */
     public List<ItemStack> getSpecialItems() {
-        return stacks.stream().filter(s -> s.getItem() instanceof FireworkStarItem).toList();
+        return stacks.stream().filter(s -> s.getItem() instanceof FireworkStarItem || s.getItem() instanceof ISpecialEffectExplosiveItem).toList();
     };
 
     @Override
