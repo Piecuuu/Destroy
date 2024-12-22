@@ -52,6 +52,12 @@ public abstract class SemiMoltenBlock extends Block implements BucketPickup {
     };
 
     @Override
+    public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pMovedByPiston) {
+        if (pLevel.isClientSide()) return;
+        pLevel.scheduleTick(pPos, this, 1);
+    }
+
+    @Override
     public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pBlock, BlockPos pFromPos, boolean pIsMoving) {
         if (pLevel.isClientSide()) return;
         pLevel.scheduleTick(pPos, this, 1);
