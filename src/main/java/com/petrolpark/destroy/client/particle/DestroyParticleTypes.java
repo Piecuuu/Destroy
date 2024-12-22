@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import com.petrolpark.destroy.Destroy;
 import com.petrolpark.destroy.client.particle.data.ConfettoParticleData;
 import com.petrolpark.destroy.client.particle.data.GasParticleData;
+import com.petrolpark.destroy.client.particle.data.BoilingFluidBubbleParticleData;
 import com.simibubi.create.foundation.particle.ICustomParticleData;
 import com.simibubi.create.foundation.utility.Lang;
 
