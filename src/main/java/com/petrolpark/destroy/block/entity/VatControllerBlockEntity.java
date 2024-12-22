@@ -633,7 +633,7 @@ public class VatControllerBlockEntity extends SmartBlockEntity implements IHaveL
     @SuppressWarnings("null")
     public float getPressure() {
         if (getLevel().isClientSide()) return pressure.getChaseTarget(); // It thinks getLevel() might be null (it's not)
-        if (!getVatOptional().isPresent() || getOpenVent() != null) return 0f;
+        if (!getVatOptional().isPresent()) return 0f;
         if (getGasTank().isEmpty()) {
             return getLiquidTank().getFluidAmount() == getLiquidTank().getCapacity() ? 0f : AIR_PRESSURE; // Return 0 for a vacuum, and normal air pressure for a full Vat
         };
