@@ -3,11 +3,11 @@
     "ingredients": [
       {
         "fluidTag": "forge:crude_oil",
-        "amount": 500
+        "amount": 5
       },
       {
         "mixtureFluidWithSalt": "destroy:mixture",
-        "amount": 500,
+        "amount": 5,
         "cation": "destroy:ammonium",
         "anion": "destroy:nitrate",
         "concentration": 3.0

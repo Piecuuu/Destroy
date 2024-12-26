@@ -4,7 +4,6 @@ import java.util.WeakHashMap;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.petrolpark.destroy.client.gui.screen.RedstoneProgrammerScreen;
 import com.petrolpark.destroy.config.DestroyAllConfigs;
 import com.petrolpark.destroy.network.DestroyMessages;
 import com.petrolpark.destroy.network.packet.RedstoneProgramSyncC2SPacket;
@@ -35,6 +34,12 @@ import net.minecraftforge.items.SlotItemHandler;
 
 @EventBusSubscriber
 public class RedstoneProgrammerMenu extends GhostItemMenu<RedstoneProgram> {
+
+    public static final int SCREEN_ITEM_AREA_X = 3;
+    public static final int SCREEN_ITEM_AREA_Y = 31;
+    public static final int SCREEN_ITEM_AREA_WIDTH = 73;
+    public static final int SCREEN_ITEM_AREA_HEIGHT = 154;
+    public static final int SCREEN_DISTANCE_BETWEEN_CHANNELS = 20;
 
     private int offset = 0;
 
@@ -89,11 +94,11 @@ public class RedstoneProgrammerMenu extends GhostItemMenu<RedstoneProgram> {
         lastSlots.clear();
         remoteSlots.clear();
         int i = 0;
-        int position = RedstoneProgrammerScreen.ITEM_AREA.getY() - 16 - this.offset;
+        int position = SCREEN_ITEM_AREA_Y - 16 - this.offset;
         for (int channel = 0; channel < Math.min(contentHolder.getChannels().size() + 1, DestroyAllConfigs.SERVER.blocks.redstoneProgrammerMaxChannels.get()); channel++) {
-            position += RedstoneProgrammerScreen.distanceBetweenChannels;
-            Slot slot1 = addSlot(new FrequencySlotItemHandler(i++, RedstoneProgrammerScreen.ITEM_AREA.getX() + 32, position, channel, true));
-            Slot slot2 = addSlot(new FrequencySlotItemHandler(i++, RedstoneProgrammerScreen.ITEM_AREA.getX() + 50, position, channel, false));
+            position += SCREEN_DISTANCE_BETWEEN_CHANNELS;
+            Slot slot1 = addSlot(new FrequencySlotItemHandler(i++, SCREEN_ITEM_AREA_X + 32, position, channel, true));
+            Slot slot2 = addSlot(new FrequencySlotItemHandler(i++, SCREEN_ITEM_AREA_X + 50, position, channel, false));
             if (channel < contentHolder.getChannels().size()) {
                 slot1.set(contentHolder.getChannels().get(channel).networkKey.getFirst().getStack());
                 slot2.set(contentHolder.getChannels().get(channel).networkKey.getSecond().getStack());
@@ -153,8 +158,8 @@ public class RedstoneProgrammerMenu extends GhostItemMenu<RedstoneProgram> {
 
         @Override
         public boolean isValid() {
-            int position = RedstoneProgrammerScreen.distanceBetweenChannels * channelIndex - offset;
-            return position > -1 && position < RedstoneProgrammerScreen.ITEM_AREA.getHeight() - RedstoneProgrammerScreen.distanceBetweenChannels;
+            int position = SCREEN_DISTANCE_BETWEEN_CHANNELS * channelIndex - offset;
+            return position > -1 && position < SCREEN_ITEM_AREA_HEIGHT - SCREEN_DISTANCE_BETWEEN_CHANNELS;
         };
 
     };

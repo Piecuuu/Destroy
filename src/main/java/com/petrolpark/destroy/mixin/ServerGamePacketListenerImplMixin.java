@@ -2,17 +2,16 @@ package com.petrolpark.destroy.mixin;
 
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import com.petrolpark.destroy.entity.player.ExtendedInventory;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.PacketUtils;
 import net.minecraft.network.protocol.game.ServerGamePacketListener;
 import net.minecraft.network.protocol.game.ServerboundSetCarriedItemPacket;
 import net.minecraft.network.protocol.game.ServerboundSetCreativeModeSlotPacket;
@@ -31,9 +30,16 @@ public abstract class ServerGamePacketListenerImplMixin implements ServerGamePac
     @Shadow
     static Logger LOGGER;
     
-    @Overwrite
-    public void handleSetCarriedItem(ServerboundSetCarriedItemPacket packet) {
-        PacketUtils.ensureRunningOnSameThread(packet, this, player.serverLevel());
+    @Inject(
+        method = "handleSetCarriedItem",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/network/protocol/PacketUtils;ensureRunningOnSameThread(Lnet/minecraft/network/protocol/Packet;Lnet/minecraft/network/PacketListener;Lnet/minecraft/server/level/ServerLevel;)V",
+            shift = Shift.AFTER
+        ),
+        cancellable = true
+    )
+    public void handleSetCarriedItem(ServerboundSetCarriedItemPacket packet, CallbackInfo ci) {
         ExtendedInventory inv = ExtendedInventory.get(player);
         if (inv.isExtendedHotbarSlot(packet.getSlot())) {
             if (player.getInventory().selected != packet.getSlot() && player.getUsedItemHand() == InteractionHand.MAIN_HAND) {
@@ -42,8 +48,8 @@ public abstract class ServerGamePacketListenerImplMixin implements ServerGamePac
 
             inv.selected = packet.getSlot();
             player.resetLastActionTime();
-        } else {
-            LOGGER.warn("{} tried to set an invalid carried item", player.getName().getString());
+
+            ci.cancel();
         };
     };
 
