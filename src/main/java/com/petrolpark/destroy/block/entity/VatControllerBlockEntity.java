@@ -24,7 +24,7 @@ import com.petrolpark.destroy.chemistry.legacy.LegacyMixture;
 import com.petrolpark.destroy.chemistry.legacy.LegacyReaction;
 import com.petrolpark.destroy.chemistry.legacy.ReadOnlyMixture;
 import com.petrolpark.destroy.chemistry.legacy.LegacyMixture.ReactionContext;
-import com.petrolpark.destroy.client.particle.BoilingFluidBubbleParticle;
+import com.petrolpark.destroy.client.particle.data.BoilingFluidBubbleParticleData;
 import com.petrolpark.destroy.config.DestroyAllConfigs;
 import com.petrolpark.destroy.fluid.DestroyFluids;
 import com.petrolpark.destroy.fluid.MixtureFluid;
@@ -633,7 +633,7 @@ public class VatControllerBlockEntity extends SmartBlockEntity implements IHaveL
     @SuppressWarnings("null")
     public float getPressure() {
         if (getLevel().isClientSide()) return pressure.getChaseTarget(); // It thinks getLevel() might be null (it's not)
-        if (!getVatOptional().isPresent() || getOpenVent() != null) return 0f;
+        if (!getVatOptional().isPresent()) return 0f;
         if (getGasTank().isEmpty()) {
             return getLiquidTank().getFluidAmount() == getLiquidTank().getCapacity() ? 0f : AIR_PRESSURE; // Return 0 for a vacuum, and normal air pressure for a full Vat
         };
@@ -668,7 +668,7 @@ public class VatControllerBlockEntity extends SmartBlockEntity implements IHaveL
         Vat vat = vatOptional.get();
         if (cachedMixtureBoiling) { // Bubble particles
             Vec3 position = getRandomParticlePosition(vat);
-            getLevel().addAlwaysVisibleParticle(new BoilingFluidBubbleParticle.Data(liquid), position.x, position.y, position.z, 0d, 0d, 0d);
+            getLevel().addAlwaysVisibleParticle(new BoilingFluidBubbleParticleData(liquid), position.x, position.y, position.z, 0d, 0d, 0d);
         };
         if (cachedMixtureReacting) { // Splash particles
             
