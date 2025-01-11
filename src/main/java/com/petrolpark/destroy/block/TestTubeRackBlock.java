@@ -6,7 +6,7 @@ import com.petrolpark.destroy.block.entity.DestroyBlockEntityTypes;
 import com.petrolpark.destroy.block.entity.TestTubeRackBlockEntity;
 import com.petrolpark.destroy.block.shape.DestroyShapes;
 import com.petrolpark.destroy.item.IMixtureStorageItem;
-import com.petrolpark.util.MathsHelper;
+import com.petrolpark.util.RayHelper;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.item.ItemHelper;
@@ -98,7 +98,7 @@ public class TestTubeRackBlock extends Block implements IBE<TestTubeRackBlockEnt
     public static int getTargetedTube(BlockState state, BlockPos pos, Player player) {
         Vec3 start = player.getEyePosition();
         Vec3 end = player.getEyePosition().add(player.getLookAngle().scale(player.getBlockReach()));
-        return MathsHelper.getHit(List.of(getTubeBox(state, pos, 0), getTubeBox(state, pos, 1), getTubeBox(state, pos, 2), getTubeBox(state, pos, 3)), start, end);
+        return RayHelper.getHit(List.of(getTubeBox(state, pos, 0), getTubeBox(state, pos, 1), getTubeBox(state, pos, 2), getTubeBox(state, pos, 3)), start, end);
     };
 
     public static AABB getTubeBox(BlockState state, BlockPos pos, int tube) {

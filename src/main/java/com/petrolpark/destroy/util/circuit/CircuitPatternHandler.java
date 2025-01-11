@@ -15,9 +15,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 import com.petrolpark.destroy.Destroy;
-import com.petrolpark.destroy.item.CircuitPatternItem;
 import com.petrolpark.destroy.network.DestroyMessages;
 import com.petrolpark.destroy.network.packet.CircuitPatternsS2CPacket;
+import com.petrolpark.util.BinaryMatrix4x4;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -182,7 +182,7 @@ public class CircuitPatternHandler extends SavedData {
                     } else if (generationString.length() == 16) {
                         int pattern = 0;
                         for (int i = 0; i < 16; i++) {
-                            if (generationString.charAt(i) != ' ') pattern = CircuitPatternItem.punch(pattern, i);
+                            if (generationString.charAt(i) != ' ') pattern = BinaryMatrix4x4.set1(pattern, i);
                         };
                         generator = new CircuitPatternGenerator.Specific(pattern);
                     } else {

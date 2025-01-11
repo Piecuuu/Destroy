@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import com.petrolpark.PetrolparkTags.PetrolparkMenuTypeTags;
+import com.petrolpark.PetrolparkTags;
 import com.petrolpark.destroy.Destroy;
 import com.petrolpark.destroy.client.gui.menu.IExtendedInventoryMenu;
 import com.petrolpark.destroy.config.DestroyAllConfigs;
@@ -158,10 +158,11 @@ public class ExtendedInventory extends Inventory {
         if (menu instanceof IExtendedInventoryMenu) return true;
         try {
             MenuType<?> menuType = menu.getType();
+            if (menuType == null) return false;
             if (DestroyAllConfigs.SERVER.extendedInventorySafeMode.get()) {
-                return PetrolparkMenuTypeTags.ALWAYS_SHOWS_EXTENDED_INVENTORY.matches(menuType);
+                return PetrolparkTags.MenuTypes.ALWAYS_SHOWS_EXTENDED_INVENTORY.matches(menuType);
             } else {
-                return !PetrolparkMenuTypeTags.NEVER_SHOWS_EXTENDED_INVENTORY.matches(menuType);
+                return !PetrolparkTags.MenuTypes.NEVER_SHOWS_EXTENDED_INVENTORY.matches(menuType);
             }
         } catch (UnsupportedOperationException e) {
             return false;

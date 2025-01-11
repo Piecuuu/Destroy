@@ -21,7 +21,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public enum DestroyParticleTypes {
 
-    BOILING_FLUID_BUBBLE(BoilingFluidBubbleParticle.Data::new),
+    BOILING_FLUID_BUBBLE(BoilingFluidBubbleParticleData::new),
     CONFETTO(ConfettoParticleData::new),
     WHITE_CONFETTO(ConfettoParticleData.White::new),
     DISTILLATION(GasParticleData::new),

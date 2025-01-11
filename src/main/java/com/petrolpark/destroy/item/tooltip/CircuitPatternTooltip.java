@@ -1,7 +1,7 @@
 package com.petrolpark.destroy.item.tooltip;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.petrolpark.destroy.item.CircuitPatternItem;
+import com.petrolpark.util.BinaryMatrix4x4;
 import com.simibubi.create.foundation.gui.element.ScreenElement;
 
 import net.minecraft.client.gui.Font;
@@ -55,12 +55,12 @@ public class CircuitPatternTooltip extends DestroyTooltipComponent<CircuitPatter
     public static void renderCircuitMask(GuiGraphics graphics, int pattern, boolean tileBorderOnTop, ScreenElement border, ScreenElement tile, ScreenElement tileBorder) {
         if (tileBorderOnTop) border.render(graphics, 0, 0);
         for (int i = 0; i < 16; i++) {
-            if (CircuitPatternItem.isPunched(pattern, i)) continue;
+            if (BinaryMatrix4x4.is1(pattern, i)) continue;
             tileBorder.render(graphics, 7 + (i % 4) * 8, 7 + (i / 4) * 8);
         };
         if (!tileBorderOnTop) border.render(graphics, 0, 0);
         for (int i = 0; i < 16; i++) {
-            if (CircuitPatternItem.isPunched(pattern, i)) continue;
+            if (BinaryMatrix4x4.is1(pattern, i)) continue;
             tile.render(graphics, 8 + (i % 4) * 8, 8 + (i / 4) * 8);
         };
     };

@@ -8,10 +8,10 @@ import java.util.function.Consumer;
 
 import com.petrolpark.destroy.Destroy;
 import com.petrolpark.destroy.client.gui.DestroyGuiTextures;
-import com.petrolpark.destroy.item.directional.DirectionalTransportedItemStack;
 import com.petrolpark.destroy.item.renderer.CircuitPatternItemRenderer;
 import com.petrolpark.destroy.item.tooltip.CircuitPatternTooltip;
 import com.petrolpark.destroy.util.DestroyLang;
+import com.petrolpark.directionalitem.DirectionalTransportedItemStack;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 
 import net.minecraft.ChatFormatting;

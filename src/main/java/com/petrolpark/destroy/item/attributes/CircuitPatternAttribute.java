@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.petrolpark.destroy.item.CircuitPatternItem;
+import com.petrolpark.util.BinaryMatrix4x4;
 import com.simibubi.create.content.logistics.filter.ItemAttribute;
 
 import net.minecraft.nbt.CompoundTag;
@@ -21,7 +22,7 @@ public class CircuitPatternAttribute implements ItemAttribute {
 
     @Override
     public boolean appliesTo(ItemStack stack) {
-        return (stack.getItem() instanceof CircuitPatternItem && CircuitPatternItem.isPunched(CircuitPatternItem.getPattern(stack), position) == punched);
+        return (stack.getItem() instanceof CircuitPatternItem && BinaryMatrix4x4.is1(CircuitPatternItem.getPattern(stack), position) == punched);
     };
 
     @Override
@@ -29,7 +30,7 @@ public class CircuitPatternAttribute implements ItemAttribute {
         if (!(stack.getItem() instanceof CircuitPatternItem)) return List.of();
         int pattern = CircuitPatternItem.getPattern(stack);
         List<ItemAttribute> attributes = new ArrayList<>(16);
-        for (int i = 0; i < 16; i++) attributes.add(new CircuitPatternAttribute(i, CircuitPatternItem.isPunched(pattern, i)));
+        for (int i = 0; i < 16; i++) attributes.add(new CircuitPatternAttribute(i, BinaryMatrix4x4.is1(pattern, i)));
         return attributes;
     };
 

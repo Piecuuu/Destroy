@@ -14,11 +14,12 @@ import com.petrolpark.destroy.block.entity.behaviour.ICircuitPuncher;
 import com.petrolpark.destroy.block.entity.behaviour.CircuitPunchingBehaviour.CircuitPunchingSpecifics;
 import com.petrolpark.destroy.item.CircuitMaskItem;
 import com.petrolpark.destroy.item.CircuitPatternItem;
-import com.petrolpark.destroy.item.directional.DirectionalTransportedItemStack;
-import com.petrolpark.destroy.item.directional.IDirectionalOnBelt;
 import com.petrolpark.destroy.network.DestroyMessages;
 import com.petrolpark.destroy.network.packet.RequestKeypunchNamePacket;
 import com.petrolpark.destroy.util.circuit.CircuitPuncherHandler;
+import com.petrolpark.directionalitem.DirectionalTransportedItemStack;
+import com.petrolpark.directionalitem.IDirectionalOnBelt;
+import com.petrolpark.util.BinaryMatrix4x4;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
@@ -85,14 +86,10 @@ public class KeypunchBlockEntity extends KineticBlockEntity implements ICircuitP
         if (!(stack.getItem() instanceof CircuitMaskItem)) return false;
         int pattern = CircuitPatternItem.getPattern(stack);
 
-        int positionToPunch = getActualPosition();
-        for (int i = 0; i < input.getRotation().ordinal(); i++) {
-            positionToPunch = CircuitPatternItem.rotated90Anticlockwise[positionToPunch];
-        };
-        if (stack.getOrCreateTag().contains("Flipped")) positionToPunch = CircuitPatternItem.flipped[positionToPunch];
-        
+        int positionToPunch = BinaryMatrix4x4.rotate(getActualPosition(), input.getRotation());
+        if (stack.getOrCreateTag().contains("Flipped")) positionToPunch = BinaryMatrix4x4.flip(positionToPunch);
 
-        if (CircuitPatternItem.isPunched(pattern, positionToPunch)) return false;
+        if (BinaryMatrix4x4.is1(pattern, positionToPunch)) return false;
 
         if (!simulate) {
             ItemStack resultStack = CircuitMaskItem.contaminate(input.stack, uuid);
@@ -100,13 +97,13 @@ public class KeypunchBlockEntity extends KineticBlockEntity implements ICircuitP
                 output.set(new TransportedItemStack(resultStack));
                 return true;
             };
-            CircuitPatternItem.putPattern(resultStack, CircuitPatternItem.punch(pattern, positionToPunch));
+            CircuitPatternItem.putPattern(resultStack, BinaryMatrix4x4.set1(pattern, positionToPunch));
             DirectionalTransportedItemStack result = DirectionalTransportedItemStack.copy(input);
             result.stack = resultStack;
             output.set(result);
             punchingBehaviour.particleItem = resultStack;
 
-            int newPattern = CircuitPatternItem.punch(previouslyPunched, positionToPunch); // Record this for the advancement
+            int newPattern = BinaryMatrix4x4.set1(previouslyPunched, positionToPunch); // Record this for the advancement
             if (previouslyPunched != newPattern) {
                 differentPositionsPunched++;
                 previouslyPunched = newPattern;
@@ -147,7 +144,7 @@ public class KeypunchBlockEntity extends KineticBlockEntity implements ICircuitP
         };
         int pos = pistonPosition;
         for (int i = 0; i < rot; i++) {
-            pos = CircuitPatternItem.rotated90[pos];
+            pos = BinaryMatrix4x4.ROTATED_90[pos];
         };
         return pos;
     };
