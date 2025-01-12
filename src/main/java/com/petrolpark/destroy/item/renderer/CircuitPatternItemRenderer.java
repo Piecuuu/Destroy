@@ -1,16 +1,16 @@
 package com.petrolpark.destroy.item.renderer;
 
-import java.util.Map;
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
+import com.petrolpark.PetrolparkItemDisplayContexts;
 import com.petrolpark.destroy.Destroy;
-import com.petrolpark.destroy.client.DestroyItemDisplayContexts;
 import com.petrolpark.destroy.client.model.DummyBaker;
-import com.petrolpark.destroy.item.CircuitMaskItem;
 import com.petrolpark.destroy.item.CircuitPatternItem;
+import com.petrolpark.util.BinaryMatrix4x4;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
 import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
@@ -18,7 +18,7 @@ import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.BlockModel;
-import net.minecraft.client.renderer.block.model.ItemModelGenerator; 
+import net.minecraft.client.renderer.block.model.ItemModelGenerator;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.BakedModel;
@@ -58,7 +58,7 @@ public class CircuitPatternItemRenderer extends CustomRenderedItemModelRenderer 
         ms.pushPose();
         Minecraft mc = Minecraft.getInstance();
 
-        if (transformType == DestroyItemDisplayContexts.BELT) {
+        if (transformType == PetrolparkItemDisplayContexts.BELT) {
             if (stack.getOrCreateTag().contains("Flipped")) TransformStack.cast(ms).rotateY(180);
         };
 
@@ -66,7 +66,7 @@ public class CircuitPatternItemRenderer extends CustomRenderedItemModelRenderer 
         itemRenderer.render(stack, ItemDisplayContext.NONE, false, ms, buffer, light, overlay, model.getOriginalModel()); // Render the Item normally
         int pattern = CircuitPatternItem.getPattern(stack);
         for (int i = 0; i < 16; i++) {
-            if (CircuitMaskItem.isPunched(pattern, i)) continue;
+            if (BinaryMatrix4x4.is1(pattern, i)) continue;
             itemRenderer.render(stack, ItemDisplayContext.NONE, false, ms, buffer, light, overlay, models[i]);
         };
 

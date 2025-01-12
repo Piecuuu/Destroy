@@ -48,6 +48,7 @@ public class UniversalArmorTrimItemOverrides extends ItemOverrides {
     @Override
     public BakedModel resolve(BakedModel model, ItemStack stack, ClientLevel level, LivingEntity entity, int seed) {
         BakedModel defaultModel = wrapped.resolve(model, stack, level, entity, seed);
+        if (level == null) return defaultModel;
         Optional<TrimMaterial> materialOptional = ArmorTrim.getTrim(level.registryAccess(), stack).map(ArmorTrim::material).map(Holder::value);
         if (materialOptional.isEmpty()) return defaultModel;
         if (!(stack.getItem() instanceof ArmorItem armorItem)) return defaultModel;

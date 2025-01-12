@@ -1,6 +1,6 @@
 package com.petrolpark.destroy.effect;
 
-import com.petrolpark.destroy.util.RayHelper;
+import com.petrolpark.util.RayHelper;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectCategory;

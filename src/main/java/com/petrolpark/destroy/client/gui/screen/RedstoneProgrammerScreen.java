@@ -44,11 +44,11 @@ public class RedstoneProgrammerScreen extends AbstractSimiContainerScreen<Redsto
     private int width;
 
     // Areas
-    public static final Rect2i ITEM_AREA = new Rect2i(3, 31, 73, 154);
     public static final Rect2i NOTE_AREA = new Rect2i(77, 31, 168, 154);
+    public static final Rect2i ITEM_AREA = new Rect2i(RedstoneProgrammerMenu.SCREEN_ITEM_AREA_X, RedstoneProgrammerMenu.SCREEN_ITEM_AREA_Y, RedstoneProgrammerMenu.SCREEN_ITEM_AREA_WIDTH, RedstoneProgrammerMenu.SCREEN_ITEM_AREA_HEIGHT);
 
     // Spacing
-    public static final int distanceBetweenChannels = 20;
+    public static final int DISTANCE_BETWEEN_CHANNELS = RedstoneProgrammerMenu.SCREEN_DISTANCE_BETWEEN_CHANNELS;
     private static final int noteWidth = 4;
 
     // Scroll values
@@ -245,7 +245,7 @@ public class RedstoneProgrammerScreen extends AbstractSimiContainerScreen<Redsto
             // Determine the channel on which we are clicking
             ImmutableList<Channel> channels = program.getChannels();
             double posInList = mY - NOTE_AREA.getY() + verticalScroll;
-            int channelNo = (int)(posInList / distanceBetweenChannels);
+            int channelNo = (int)(posInList / DISTANCE_BETWEEN_CHANNELS);
             if (channelNo < 0 || channelNo >= channels.size()) return super.mouseClicked(mouseX, mouseY, button);
             Channel channel = channels.get(channelNo);
 
@@ -334,7 +334,7 @@ public class RedstoneProgrammerScreen extends AbstractSimiContainerScreen<Redsto
             // Changing strengths of notes
             ImmutableList<Channel> channels = program.getChannels();
             double posInList = mY - NOTE_AREA.getY() + verticalScroll;
-            int channelNo = (int)(posInList / distanceBetweenChannels);
+            int channelNo = (int)(posInList / DISTANCE_BETWEEN_CHANNELS);
             if (channelNo >= 0 && channelNo < channels.size()) { // If we're scrolling on a valid channel
                 Channel channel = channels.get(channelNo);
                 int note = (int)((mX - NOTE_AREA.getX() + horizontalScroll.getChaseTarget()) / noteWidth);
@@ -433,8 +433,8 @@ public class RedstoneProgrammerScreen extends AbstractSimiContainerScreen<Redsto
         // Channels
         int channelNo = 0;
         for (Channel channel : program.getChannels()) {
-            float verticalOffset = yOffset + channelNo * distanceBetweenChannels;
-            if (verticalOffset < -distanceBetweenChannels || verticalOffset > ITEM_AREA.getHeight()) {
+            float verticalOffset = yOffset + channelNo * DISTANCE_BETWEEN_CHANNELS;
+            if (verticalOffset < -DISTANCE_BETWEEN_CHANNELS || verticalOffset > ITEM_AREA.getHeight()) {
                 channelNo++;
                 continue;
             };
@@ -479,7 +479,7 @@ public class RedstoneProgrammerScreen extends AbstractSimiContainerScreen<Redsto
         GuiHelper.startStencil(graphics, ITEM_AREA.getX(), ITEM_AREA.getY(), ITEM_AREA.getWidth(), ITEM_AREA.getHeight());
         if (channelNo < DestroyAllConfigs.SERVER.blocks.redstoneProgrammerMaxChannels.get()) {
             ms.pushPose();
-            ms.translate(ITEM_AREA.getX(), NOTE_AREA.getY() + yOffset + channelNo * distanceBetweenChannels, 0f);
+            ms.translate(ITEM_AREA.getX(), NOTE_AREA.getY() + yOffset + channelNo * DISTANCE_BETWEEN_CHANNELS, 0f);
             DestroyGuiTextures.REDSTONE_PROGRAMMER_ITEM_SLOTS.render(graphics, 31, 3);
             ms.popPose();
         };
@@ -533,7 +533,7 @@ public class RedstoneProgrammerScreen extends AbstractSimiContainerScreen<Redsto
     };
 
     public void clampVerticalScroll(int newScroll) {
-        verticalScroll = Mth.clamp(newScroll, 0, Math.max(0, 6 + Math.min(program.getChannels().size() + 1, DestroyAllConfigs.SERVER.blocks.redstoneProgrammerMaxChannels.get()) * distanceBetweenChannels - ITEM_AREA.getHeight()));
+        verticalScroll = Mth.clamp(newScroll, 0, Math.max(0, 6 + Math.min(program.getChannels().size() + 1, DestroyAllConfigs.SERVER.blocks.redstoneProgrammerMaxChannels.get()) * DISTANCE_BETWEEN_CHANNELS - ITEM_AREA.getHeight()));
     };
 
     public void clampHorizontalScroll(double newScroll, double speed) {

@@ -159,8 +159,14 @@ public class ChunkCrudeOil {
         return amount;
     };
 
-    public void decreaseAmount(int decrease) {
+    public int setAmount(int amount) {
+        this.amount = Math.max(0, amount);
+        return amount;
+    };
+
+    public int decreaseAmount(int decrease) {
         amount = (int)Math.max(0, amount - decrease);
+        return amount;
     };
 
     public static class Provider implements ICapabilityProvider, INBTSerializable<CompoundTag> {

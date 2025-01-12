@@ -666,6 +666,13 @@ public class DestroyReactions {
         .addProduct(DestroyMolecules.ACETIC_ACID)
         .build(),
 
+    METHYL_METHACRYLATE_POLYMERIZATION = builder()
+        .id("methyl_methacrylate_polymerization")
+        .addReactant(DestroyMolecules.METHYL_METHACRYLATE)
+        .addCatalyst(DestroyMolecules.AIBN, 0)
+        .withResult(3f, PrecipitateReactionResult.of(DestroyItems.POLYMETHYL_METHACRYLATE::asStack))
+        .build(),
+
     NAUGHTY_REACTION = builder()
         .id("naughty_reaction")
         .addReactant(DestroyMolecules.PHENYLACETONE)

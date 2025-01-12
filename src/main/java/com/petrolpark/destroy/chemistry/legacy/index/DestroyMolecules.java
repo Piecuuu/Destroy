@@ -882,6 +882,15 @@ public final class DestroyMolecules {
         .tag(Tags.SOLVENT)
         .build(),
 
+    METHYL_METHACRYLATE = builder()
+        .id("methyl_methacrylate")
+        .structure(LegacyMolecularStructure.deserialize("destroy:linear:CC(=C)C(=O)OC"))
+        .boilingPoint(101f)
+        .density(940f)
+        .molarHeatCapacity(191f)
+        .tag(Tags.SMOG)
+        .build(),
+
     METHYL_SALICYLATE = builder()
         .id("methyl_salicylate")
         .structure(LegacyMolecularStructure.deserialize("destroy:benzene:C(=O)OC,O,,,,"))

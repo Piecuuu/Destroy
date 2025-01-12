@@ -12,10 +12,10 @@
         "amount": 200
       },
       {
-        "tag": "destroy:explosive/primary"
+        "tag": "destroy:explosives/primary"
       },
       {
-        "tag": "destroy:explosive/secondary"
+        "tag": "destroy:explosives/secondary"
       }
     ],
     "results": [

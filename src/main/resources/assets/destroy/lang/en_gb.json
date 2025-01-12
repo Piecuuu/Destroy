@@ -1256,5 +1256,6 @@
     "item.destroy.zinc_powder": "Zinc Powder",
     "item.destroy.zinc_sheet": "Zinc Sheet",
     "item.destroy.zircon": "Zircon",
-    "item.destroy.zirconium_ingot": "Zirconium Ingot"
+    "item.destroy.zirconium_ingot": "Zirconium Ingot",
+    "item.destroy.molecule_display": "Molecule Display"
 }

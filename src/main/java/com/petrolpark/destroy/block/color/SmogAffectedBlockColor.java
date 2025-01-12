@@ -18,15 +18,16 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.ColorResolver;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.GrassColor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.common.util.LazyOptional;
 
 public class SmogAffectedBlockColor implements BlockColor {
 
-    public static final ColorResolver GRASS_COLOR_RESOLVER = (b, x, z) -> -1;
-    public static final ColorResolver FOLIAGE_COLOR_RESOLVER = (b, x, z) -> -1;
-    public static final ColorResolver WATER_COLOR_RESOLVER = (b, x, z) -> -1;
+    public static final ColorResolver GRASS_COLOR_RESOLVER = Biome::getGrassColor;
+    public static final ColorResolver FOLIAGE_COLOR_RESOLVER = (b, x, z) -> b.getFoliageColor();
+    public static final ColorResolver WATER_COLOR_RESOLVER = (b, x, z) -> b.getWaterColor();
 
     public static final int getAverageGrassColor(BlockAndTintGetter level, BlockPos pos) {
         return level.getBlockTint(pos, GRASS_COLOR_RESOLVER);

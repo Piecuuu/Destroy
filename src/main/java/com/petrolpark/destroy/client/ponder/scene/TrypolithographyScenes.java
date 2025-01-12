@@ -4,6 +4,7 @@ import com.petrolpark.destroy.block.entity.KeypunchBlockEntity;
 import com.petrolpark.destroy.client.ponder.instruction.ShowCircuitPatternInstruction;
 import com.petrolpark.destroy.item.CircuitMaskItem;
 import com.petrolpark.destroy.item.DestroyItems;
+import com.petrolpark.util.BinaryMatrix4x4;
 import com.simibubi.create.content.logistics.depot.EjectorBlockEntity;
 import com.simibubi.create.foundation.ponder.ElementLink;
 import com.simibubi.create.foundation.ponder.PonderPalette;
@@ -72,7 +73,7 @@ public class TrypolithographyScenes {
 
         scene.idle(40);
         ItemStack circuit1 = DestroyItems.CIRCUIT_MASK.asStack();
-        int pattern1 = CircuitMaskItem.punch(0, 0);
+        int pattern1 = BinaryMatrix4x4.set1(0, 0);
         CircuitMaskItem.putPattern(circuit1, pattern1);
         scene.world.changeBeltItemTo(circuit1Element, circuit1);
         scene.idle(40);
@@ -102,7 +103,7 @@ public class TrypolithographyScenes {
         scene.idle(40);
 
         ItemStack circuit2 = DestroyItems.CIRCUIT_MASK.asStack();
-        int pattern2 = CircuitMaskItem.punch(pattern1, 6);
+        int pattern2 = BinaryMatrix4x4.set1(pattern1, 6);
         CircuitMaskItem.putPattern(circuit2, pattern2);
         scene.world.changeBeltItemTo(circuit2Element, circuit2);
         scene.idle(40);
@@ -126,7 +127,7 @@ public class TrypolithographyScenes {
         scene.idle(80);
 
         ItemStack circuit3 = DestroyItems.CIRCUIT_MASK.asStack();
-        CircuitMaskItem.putPattern(circuit3, CircuitMaskItem.punch(pattern2, 9));
+        CircuitMaskItem.putPattern(circuit3, BinaryMatrix4x4.set1(pattern2, 9));
         scene.world.removeItemsFromBelt(thirdBelt);
         ElementLink<BeltItemElement> circuit3Element = scene.world.createItemOnBelt(thirdBelt, Direction.DOWN, circuit3);
         scene.idle(40);
@@ -181,7 +182,7 @@ public class TrypolithographyScenes {
         scene.idle(40);
         scene.world.removeItemsFromBelt(depot);
 
-        int pattern1 = CircuitMaskItem.punch(0, 0);
+        int pattern1 = BinaryMatrix4x4.set1(0, 0);
         ItemStack circuit1 = DestroyItems.CIRCUIT_MASK.asStack();
         CircuitMaskItem.putPattern(circuit1, pattern1);
         scene.world.createItemOnBeltLike(depot, Direction.DOWN, circuit1);
@@ -201,7 +202,7 @@ public class TrypolithographyScenes {
         scene.idle(40);
         scene.world.removeItemsFromBelt(depot);
 
-        int pattern2 = CircuitMaskItem.punch(pattern1, 3);
+        int pattern2 = BinaryMatrix4x4.set1(pattern1, 3);
         ItemStack circuit2 = DestroyItems.CIRCUIT_MASK.asStack();
         CircuitMaskItem.putPattern(circuit2, pattern2);
         scene.world.createItemOnBeltLike(depot, Direction.DOWN, circuit2);
@@ -230,7 +231,7 @@ public class TrypolithographyScenes {
         scene.idle(40);
         scene.world.removeItemsFromBelt(depot);
 
-        int pattern3 = CircuitMaskItem.punch(pattern2, 15);
+        int pattern3 = BinaryMatrix4x4.set1(pattern2, 15);
         ItemStack circuit3 = DestroyItems.CIRCUIT_MASK.asStack();
         CircuitMaskItem.putPattern(circuit3, pattern3);
         scene.world.createItemOnBeltLike(depot, Direction.DOWN, circuit3);
@@ -278,7 +279,7 @@ public class TrypolithographyScenes {
         scene.idle(40);
         scene.world.removeItemsFromBelt(ejector);
 
-        int pattern1 = CircuitMaskItem.punch(0, 1);
+        int pattern1 = BinaryMatrix4x4.set1(0, 1);
         ItemStack circuit1 = DestroyItems.CIRCUIT_MASK.asStack();
         CircuitMaskItem.putPattern(circuit1, pattern1);
         scene.world.createItemOnBeltLike(ejector, Direction.DOWN, circuit1);
@@ -332,7 +333,7 @@ public class TrypolithographyScenes {
         scene.idle(40);
         scene.world.removeItemsFromBelt(ejector);
         
-        int pattern2 = CircuitMaskItem.punch(pattern1, 2);
+        int pattern2 = BinaryMatrix4x4.set1(pattern1, 2);
         ItemStack circuit2 = circuit1Flipped.copy();
         CircuitMaskItem.putPattern(circuit2, pattern2);
         scene.world.createItemOnBeltLike(ejector, Direction.DOWN, circuit2);

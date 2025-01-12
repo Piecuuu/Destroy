@@ -380,7 +380,6 @@ public class ExtendedInventoryClientHandler {
         Minecraft mc = Minecraft.getInstance();
 
         if (menu == mc.player.inventoryMenu) DestroyMessages.sendToServer(new RequestInventoryFullStateC2SPacket()); // Just in case
-        
 
         if (!ExtendedInventory.supportsExtraInventory(menu) && !(menu == mc.player.inventoryMenu || screen instanceof CreativeModeInventoryScreen)) {
             currentScreen = null;

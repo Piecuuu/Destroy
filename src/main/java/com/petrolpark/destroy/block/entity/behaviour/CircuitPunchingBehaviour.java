@@ -3,7 +3,7 @@ package com.petrolpark.destroy.block.entity.behaviour;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-import com.petrolpark.destroy.item.directional.DirectionalTransportedItemStack;
+import com.petrolpark.directionalitem.DirectionalTransportedItemStack;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.kinetics.belt.behaviour.BeltProcessingBehaviour;
 import com.simibubi.create.content.kinetics.belt.behaviour.TransportedItemStackHandlerBehaviour;

@@ -83,7 +83,7 @@ public class DestroyClientModEvents {
      */
     @SubscribeEvent
     public static void registerColorResolvers(RegisterColorHandlersEvent.ColorResolvers event) {
-        event.register(SmogAffectedBlockColor.GRASS_COLOR_RESOLVER);
+        //event.register(SmogAffectedBlockColor.GRASS_COLOR_RESOLVER);
     };
 
     @SubscribeEvent
