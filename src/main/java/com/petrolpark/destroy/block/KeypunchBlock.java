@@ -1,6 +1,6 @@
 package com.petrolpark.destroy.block;
 
-import com.petrolpark.block.entity.behaviour.AbstractRememberPlacerBehaviour;
+import com.petrolpark.compat.create.block.entity.behaviour.AbstractRememberPlacerBehaviour;
 import com.petrolpark.destroy.Destroy;
 import com.petrolpark.destroy.block.entity.DestroyBlockEntityTypes;
 import com.petrolpark.destroy.block.entity.KeypunchBlockEntity;

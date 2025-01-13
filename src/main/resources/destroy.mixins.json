@@ -54,8 +54,6 @@
         "SequencedAssemblyRecipeMixin",
         "ServerGamePacketListenerImplMixin",
         "ServerLevelMixin",
-        "ShulkerBoxBlockEntityMixin",
-        "ShulkerBoxBlockMixin",
         "SoundEntryBuilderMixin",
         "SplashingTypeMixin",
         "SpoutBlockMixin",

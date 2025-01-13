@@ -17,7 +17,6 @@ import com.petrolpark.destroy.item.renderer.SeismometerItemRenderer;
 import com.petrolpark.destroy.item.tooltip.ExplosivePropertiesTooltip;
 import com.petrolpark.destroy.mixin.accessor.MenuRowsAccessor;
 import com.petrolpark.destroy.util.DestroyLang;
-import com.petrolpark.destroy.util.FireproofingHelper;
 import com.petrolpark.destroy.util.PollutionHelper;
 import com.petrolpark.destroy.world.explosion.ExplosiveProperties;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
@@ -158,10 +157,6 @@ public class DestroyClientEvents {
 
         // Add a bit of pedantry to TNT
         if (item.equals(Items.TNT)) event.getToolTip().add(DestroyLang.translate("tooltip.tnt").style(ChatFormatting.GRAY).component());
-
-        // Inform of fireproof items
-        if (FireproofingHelper.isFireproof(stack))
-            event.getToolTip().add(DestroyLang.translate("tooltip.fireproof").style(ChatFormatting.RED).component());
     };
 
     @SubscribeEvent

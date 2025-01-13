@@ -48,8 +48,8 @@ import com.petrolpark.destroy.util.vat.VatMaterial;
 import com.petrolpark.destroy.world.damage.DestroyDamageTypes;
 import com.petrolpark.destroy.world.loot.DestroyLoot;
 import com.petrolpark.destroy.world.village.DestroyVillagers;
-import com.petrolpark.registrate.PetrolparkRegistrate;
 import com.simibubi.create.content.equipment.goggles.GogglesItem;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipHelper.Palette;
@@ -77,7 +77,7 @@ public class Destroy {
     public static final boolean datagen = false;
 
     // Registrate
-    public static final PetrolparkRegistrate REGISTRATE = new PetrolparkRegistrate(MOD_ID);
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
 
     // Level-attached managers
     public static final CircuitPuncherHandler CIRCUIT_PUNCHER_HANDLER = new CircuitPuncherHandler();

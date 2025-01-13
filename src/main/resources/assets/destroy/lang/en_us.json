@@ -294,6 +294,9 @@
     "commands.destroy.pollution.set": "Set level of Pollution of type %s to %s. A reload may be required for some changes to take effect.",
     "commands.destroy.regeneratecircuitpattern": "Reset the circuit pattern %s",
 
+    "contaminant.destroy.fireproof": "\uED11 Fireproof",
+    "contaminant.destroy.fireproof.absent": "\ued06 Flammable",
+
     "death.attack.destroy.alcohol": "%1$s died of alcohol poisoning",
     "death.attack.destroy.chemical_burn": "%1$s died from chemical burns",
     "death.attack.destroy.chemical_poison": "%1$s inhaled %2$s",
@@ -1334,7 +1337,6 @@
     "destroy.tooltip.eating_prevented.baby_blue": "You don't feel hungry right now",
     "destroy.tooltip.eating_prevented.mouth_protected": "Your protective facewear blocks your mouth",
     "destroy.tooltip.explosion_condition_active": "Active: %1$s",
-    "destroy.tooltip.fireproof": "\uED11 Fireproof",
     "destroy.tooltip.liable_to_change": "This feature is likely to be _removed_ or _heavily modified_ in the full release of Destroy. (You can disable this message in configs).",
     "destroy.tooltip.measuring_cylinder": "Transfer from %1$s to %2$s",
     "destroy.tooltip.mixture_contents.concentration": "%1$sM",
@@ -1484,7 +1486,7 @@
     "effect.destroy.hangover": "Hangover",
     "effect.destroy.hangover.description": "Deals damage every time a _loud noise_ is heard; curable with _Aspirin_.",
     "effect.destroy.inebriation": "Inebriation",
-    "effect.destroy.inebriation.description": "Causes _drunken slipping_; higher levels also cause nausea, blindess and eventually _alcohol poisoning_.",
+    "effect.destroy.inebriation.description": "Causes _drunken slipping_; higher levels also cause nausea, blindness and eventually _alcohol poisoning_.",
     "effect.destroy.lead_poisoning": "Lead Poisoning",
     "effect.destroy.lead_poisoning.description": "Cognitive decline causes the slow _loss of experience points_. Violent tendencies may cause players to _randomly lash out_ at targeted mobs. Also causes _infertility_.",
     "effect.destroy.baby_blue_high": "Baby Blue High",
