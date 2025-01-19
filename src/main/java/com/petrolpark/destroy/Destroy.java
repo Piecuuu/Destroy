@@ -74,7 +74,7 @@ public class Destroy {
 
     // Utility
     public static final Logger LOGGER = LogUtils.getLogger();
-    public static final boolean datagen = false;
+    public static final boolean datagen = true;
 
     // Registrate
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
